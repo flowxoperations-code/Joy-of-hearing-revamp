@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Disclaimer | Joy of Hearing" description="Medical disclaimer for the Joy of Hearing website.">
+  <section class="py-20 md:py-32 bg-secondary text-white overflow-hidden relative">
+    <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+      <span class="text-primary font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-4 block">Legal</span>
+      <h1 class="text-4xl md:text-6xl font-semibold mb-6 tracking-tight">Disclaimer</h1>
+      <p class="text-lg text-white/70">Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-bg">
+    <div class="max-w-4xl mx-auto px-4 prose prose-lg prose-headings:text-fg prose-p:text-fg-muted prose-a:text-primary">
+      <h2>Website Disclaimer</h2>
+      <p>The information provided by Joy of Hearing on this website is for general informational purposes only. All information on the Site is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the Site.</p>
+
+      <h2>Medical Disclaimer</h2>
+      <p>The Site cannot and does not contain medical/health advice. The medical/health information is provided for general informational and educational purposes only and is not a substitute for professional advice. Accordingly, before taking any actions based upon such information, we encourage you to consult with the appropriate professionals.</p>
+      
+      <p>The online hearing and speech assessments provided on this website are designed for preliminary screening purposes only. They do not constitute a clinical diagnosis, nor do they replace a comprehensive evaluation by a qualified audiologist or speech-language pathologist.</p>
+
+      <h2>External Links Disclaimer</h2>
+      <p>The Site may contain (or you may be sent through the Site) links to other websites or content belonging to or originating from third parties. Such external links are not investigated, monitored, or checked for accuracy, adequacy, validity, reliability, availability or completeness by us.</p>
+    </div>
+  </section>
+</BaseLayout>

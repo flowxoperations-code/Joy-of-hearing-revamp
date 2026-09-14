@@ -1,0 +1,43 @@
+---
+import Card from './Card.astro';
+import Icon from './Icon.astro';
+import Button from './Button.astro';
+
+interface Props {
+  name: string;
+  addressLine1: string;
+  phone: string;
+  googleMapsEmbedUrl: string;
+  slug: string;
+}
+
+const { name, addressLine1, phone, googleMapsEmbedUrl, slug } = Astro.props;
+---
+<Card class="flex flex-col h-full shadow-premium hover:shadow-premium-hover hover:-translate-y-1 transition-all duration-300 border-border bg-white rounded-2xl p-8">
+  <div class="flex items-start gap-4 mb-6">
+    <div class="p-3 bg-primary/10 text-primary rounded-xl shrink-0 mt-1">
+      <Icon name="map-pin" size={24} />
+    </div>
+    <div>
+      <h3 class="text-2xl font-bold text-fg tracking-tight">{name}</h3>
+      <p class="text-base text-fg-muted line-clamp-2 mt-2 leading-relaxed">{addressLine1}</p>
+    </div>
+  </div>
+  
+  <div class="flex flex-col gap-3 mb-8 ml-16">
+    <a href={`tel:${phone}`} class="flex items-center text-base text-fg font-medium hover:text-primary transition-colors">
+      <Icon name="phone" size={18} class="mr-3 text-primary shrink-0" />
+      {phone}
+    </a>
+    <a href={googleMapsEmbedUrl} target="_blank" rel="noopener noreferrer" class="flex items-center text-base text-fg font-medium hover:text-primary transition-colors">
+      <Icon name="map-pin" size={18} class="mr-3 text-primary shrink-0" />
+      Get directions
+    </a>
+  </div>
+  
+  <div class="mt-auto">
+    <Button href={`/branches/${slug}`} variant="secondary" class="w-full font-medium hover:bg-primary hover:text-white transition-all duration-300">
+      View Clinic Details
+    </Button>
+  </div>
+</Card>

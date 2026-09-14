@@ -1,0 +1,38 @@
+---
+import Card from './Card.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  quote: string;
+  firstName: string;
+  city?: string;
+  rating?: number;
+}
+
+const { quote, firstName, city, rating = 5 } = Astro.props;
+---
+<Card class="flex flex-col h-full shadow-premium hover:shadow-premium-hover hover:-translate-y-1 transition-all duration-300 border-border bg-white group rounded-2xl p-8 relative overflow-hidden">
+  <div class="absolute -top-4 -right-4 text-primary/5 group-hover:text-primary/10 transition-colors duration-500">
+    <Icon name="message-circle" size={120} />
+  </div>
+  
+  <div class="text-primary mb-6 relative z-10">
+    {Array.from({ length: 5 }).map((_, i) => (
+      <Icon name="star" size={20} class={i < rating ? "fill-current inline-block" : "text-border fill-transparent inline-block"} />
+    ))}
+  </div>
+  
+  <p class="text-lg text-fg italic mb-8 flex-grow relative z-10 leading-relaxed font-medium">"{quote}"</p>
+  
+  <div class="mt-auto relative z-10">
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xl group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+        {firstName.charAt(0)}
+      </div>
+      <div>
+        <p class="font-bold text-fg text-base tracking-tight">{firstName}</p>
+        {city && <p class="text-sm text-fg-muted mt-0.5">{city}</p>}
+      </div>
+    </div>
+  </div>
+</Card>

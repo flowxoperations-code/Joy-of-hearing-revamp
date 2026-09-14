@@ -1,0 +1,28 @@
+name: deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+      - run: npm run build
+        env:
+          PUBLIC_GA4_ID: ${{ secrets.PUBLIC_GA4_ID }}
+          PUBLIC_WEB3FORMS_KEY: ${{ secrets.PUBLIC_WEB3FORMS_KEY }}
+      - name: Lighthouse CI (mobile, perf >=95)
+        run: npx @lhci/cli@latest autorun --collect.staticDistDir=dist
+      # Uncomment when ready to deploy
+      # - name: Deploy to Hostinger via lftp
+      #   env:
+      #     FTP_HOST: ${{ secrets.HOSTINGER_FTP_HOST }}
+      #     FTP_USER: ${{ secrets.HOSTINGER_FTP_USER }}
+      #     FTP_PASS: ${{ secrets.HOSTINGER_FTP_PASS }}
+      #   run: |
+      #     sudo apt-get install -y lftp
+      #     lftp -e "mirror -R --delete dist/ public_html/; bye" \
+      #       -u "$FTP_USER","$FTP_PASS" "$FTP_HOST"

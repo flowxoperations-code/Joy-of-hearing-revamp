@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+
+const branches = await getCollection('branches');
+const sortedBranches = branches.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout 
+  title="Our Clinics | Joy of Hearing"
+  description="Find a Joy of Hearing clinic near you in Punjab. We have branches in Jalandhar, Nawasahar, Hoshiarpur, Pathankot, Gurdaspur, Tarn Taran, and Faridkot."
+>
+  <section class="pt-32 pb-16 max-w-5xl mx-auto px-4 text-center border-b border-border/50">
+    <h1 class="reveal opacity-0 translate-y-6 transition-all duration-1000 ease-out text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tighter text-fg mb-4 leading-none">
+      Our Locations.
+    </h1>
+    <p class="reveal opacity-0 translate-y-6 transition-all duration-1000 delay-200 ease-out text-xl md:text-2xl text-fg-muted max-w-2xl mx-auto font-medium leading-tight">
+      Expert audiology and speech therapy services across Punjab. Find a clinic near you.
+    </p>
+  </section>
+
+  <section class="py-16 max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {sortedBranches.map((branch, index) => (
+        <a href={`${import.meta.env.BASE_URL}branches/${branch.data.slug}`} class="group block reveal opacity-0 translate-y-6 transition-all duration-1000 ease-out" style={`transition-delay: ${(index % 3) * 150}ms`}>
+          <div class="bg-bg-soft rounded-3xl p-8 border border-border/40 hover:shadow-lg transition-shadow duration-300 h-full flex flex-col justify-between relative overflow-hidden">
+            <div class="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative z-10">
+              <h2 class="text-3xl font-semibold tracking-tighter text-fg mb-3 group-hover:text-primary transition-colors leading-tight">{branch.data.name}</h2>
+              <p class="text-fg-muted font-medium mb-6">
+                {branch.data.addressLine1}<br/>
+                {branch.data.addressLine2}
+              </p>
+            </div>
+            <div class="relative z-10 text-primary font-semibold text-lg flex items-center gap-2 group-hover:gap-3 transition-all">
+              View Clinic <Icon name="arrow-right" size={20} />
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

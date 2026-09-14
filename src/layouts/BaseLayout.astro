@@ -1,0 +1,158 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StickyContactBar from '../components/StickyContactBar.astro';
+import WhatsAppWidget from '../components/WhatsAppWidget.astro';
+import TopRibbon from '../components/TopRibbon.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+}
+
+const { 
+  title = "Joy of Hearing | Complete Hearing & Speech Solution", 
+  description = "Joy of Hearing Clinic provides expert audiology, speech therapy, and premium hearing aids with clinical excellence.",
+  keywords = "hearing aids, speech therapy, audiologist, hearing loss, hearing clinic, joy of hearing, hearing test, tinnitus"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZFFE225TB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2ZFFE225TB');
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <link rel="icon" type="image/png" sizes="96x96" href={`${import.meta.env.BASE_URL}favicon-96x96.png`} />
+    <link rel="icon" type="image/x-icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
+    <link rel="apple-touch-icon" sizes="180x180" href={`${import.meta.env.BASE_URL}apple-touch-icon.png`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="author" content="Joy of Hearing" />
+    <!-- AEO / Structured Data -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["MedicalClinic", "LocalBusiness"],
+          "@id": `${canonicalURL.origin}/#clinic`,
+          "name": "Joy of Hearing",
+          "alternateName": "Joy of Hearing Clinic",
+          "description": "Joy of Hearing is a premier hearing and speech solution clinic in India offering expert audiology, hearing aid fitting, tinnitus care, and speech therapy.",
+          "url": canonicalURL.origin,
+          "telephone": "+919548148852",
+          "priceRange": "$$",
+          "image": `${canonicalURL.origin}/images/logo-live.svg`,
+          "logo": `${canonicalURL.origin}/images/logo-live.svg`,
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "Punjab",
+            "addressCountry": "IN"
+          },
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "Punjab, India"
+          },
+          "medicalSpecialty": [
+            "Audiology",
+            "SpeechPathology"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": `${canonicalURL.origin}/#website`,
+          "url": canonicalURL.origin,
+          "name": "Joy of Hearing",
+          "publisher": {
+            "@id": `${canonicalURL.origin}/#clinic`
+          }
+        }
+      ]
+    })} />
+    
+  </head>
+  <body class="bg-bg text-fg font-sans selection:bg-primary-soft selection:text-primary-hover flex flex-col min-h-screen">
+    <TopRibbon />
+    <Header />
+    <slot />
+    <Footer />
+    <StickyContactBar />
+    <WhatsAppWidget />
+    <script>
+      // Global scroll reveal & Parallax
+      document.addEventListener('DOMContentLoaded', () => {
+        // Reveal Logic
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const el = entry.target as HTMLElement;
+              const idx = parseInt(el.dataset.staggerIdx || '0');
+              el.style.transitionDelay = `${Math.min(idx * 90, 360)}ms`;
+              el.classList.remove('opacity-0', 'translate-y-6', 'translate-y-10', 'translate-y-12');
+              revealObserver.unobserve(el);
+            }
+          });
+        }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+        
+        document.querySelectorAll('.reveal').forEach((el) => {
+          const siblings = Array.from(el.parentElement?.children || []).filter(c => c.classList.contains('reveal'));
+          (el as HTMLElement).dataset.staggerIdx = String(siblings.indexOf(el));
+          revealObserver.observe(el);
+        });
+
+        // Parallax Logic
+        const parallaxElements = document.querySelectorAll('.parallax');
+        if (parallaxElements.length > 0) {
+          const parallaxObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+              } else {
+                entry.target.classList.remove('is-visible');
+              }
+            });
+          }, { rootMargin: '100px' });
+          
+          parallaxElements.forEach(el => parallaxObserver.observe(el));
+
+          let ticking = false;
+          window.addEventListener('scroll', () => {
+            if (!ticking) {
+              window.requestAnimationFrame(() => {
+                const scrolled = window.scrollY;
+                document.querySelectorAll('.parallax.is-visible').forEach(el => {
+                  const speed = parseFloat((el as HTMLElement).dataset.speed || '0.2');
+                  (el as HTMLElement).style.transform = `translate3d(0, ${-(scrolled * speed)}px, 0)`;
+                });
+                ticking = false;
+              });
+              ticking = true;
+            }
+          }, { passive: true });
+        }
+      });
+    </script>
+  </body>
+</html>
+

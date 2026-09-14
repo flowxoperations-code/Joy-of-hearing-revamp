@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Terms of Service | Joy of Hearing" description="Read the terms and conditions for using the Joy of Hearing website.">
+  <section class="py-20 md:py-32 bg-secondary text-white overflow-hidden relative">
+    <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+      <span class="text-primary font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-4 block">Legal</span>
+      <h1 class="text-4xl md:text-6xl font-semibold mb-6 tracking-tight">Terms of Service</h1>
+      <p class="text-lg text-white/70">Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-bg">
+    <div class="max-w-4xl mx-auto px-4 prose prose-lg prose-headings:text-fg prose-p:text-fg-muted prose-a:text-primary">
+      <h2>Agreement to Terms</h2>
+      <p>By accessing or using the Joy of Hearing website, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.</p>
+
+      <h2>Intellectual Property Rights</h2>
+      <p>Unless otherwise indicated, the website and its entire contents, features, and functionality (including but not limited to all information, software, text, displays, images, video, and audio) are owned by Joy of Hearing, its licensors, or other providers of such material and are protected by copyright, trademark, and other intellectual property laws.</p>
+
+      <h2>User Representations</h2>
+      <p>By using the website, you represent and warrant that:</p>
+      <ul>
+        <li>All registration information you submit will be true, accurate, current, and complete.</li>
+        <li>You will maintain the accuracy of such information and promptly update such registration information as necessary.</li>
+        <li>You will not use the website for any illegal or unauthorized purpose.</li>
+      </ul>
+
+      <h2>Medical Disclaimer</h2>
+      <p>The content provided on this website, including the self-assessment screenings, is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+
+      <h2>Changes to Terms</h2>
+      <p>We reserve the right, in our sole discretion, to make changes or modifications to these Terms of Service at any time and for any reason. We will alert you about any changes by updating the "Last updated" date of these Terms of Service.</p>
+    </div>
+  </section>
+</BaseLayout>

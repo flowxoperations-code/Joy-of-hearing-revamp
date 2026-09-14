@@ -1,0 +1,566 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { waHref } from '../../config/contact';
+import heroImage from '../../assets/services/hearing-aids.png';
+
+// Import images for optimization
+import bteAid from '../../assets/images/bte_hearing_aid.png';
+import ricAid from '../../assets/images/ric_hearing_aid.png';
+import iteAid from '../../assets/images/ite_hearing_aid.png';
+import itcAid from '../../assets/images/itc_hearing_aid.png';
+import cicAid from '../../assets/images/cic_hearing_aid.png';
+import iicAid from '../../assets/images/iic_hearing_aid.png';
+import earbudAid from '../../assets/images/earbud_hearing_aid.png';
+
+const waLink = waHref('Hello, I would like to inquire about your Hearing Aid services.');
+
+const styleTypes = [
+  {
+    abbr: 'BTE',
+    name: 'Behind-The-Ear',
+    shortName: 'Behind-The-Ear',
+    desc: 'Rests behind the ear with sound routed into the canal via a thin tube. The most versatile style — suitable for all degrees of hearing loss.',
+    bestFor: 'All degrees of loss',
+    sizeLabel: 'Largest',
+    sizeVal: 6,
+    color: 'from-slate-100 to-slate-50',
+    textColor: 'text-slate-500',
+    image: bteAid,
+  },
+  {
+    abbr: 'RIC',
+    name: 'Receiver-In-Canal',
+    shortName: 'RIC / RITE',
+    desc: 'Smaller than BTEs with the speaker sitting directly in the ear canal — delivering a more natural, open sound experience.',
+    bestFor: 'Mild to severe loss',
+    sizeLabel: 'Slim',
+    sizeVal: 5,
+    color: 'from-blue-50 to-slate-50',
+    textColor: 'text-blue-400',
+    image: ricAid,
+  },
+  {
+    abbr: 'ITE',
+    name: 'In-The-Ear',
+    shortName: 'In-The-Ear',
+    desc: 'Custom-molded to sit in the outer portion of the ear bowl. Larger surface area allows easy access to volume and program controls.',
+    bestFor: 'Mild to severe hearing loss',
+    sizeLabel: 'Compact',
+    sizeVal: 4,
+    color: 'from-amber-50 to-slate-50',
+    textColor: 'text-amber-500',
+    image: iteAid,
+  },
+  {
+    abbr: 'ITC',
+    name: 'In-The-Canal',
+    shortName: 'In-The-Canal',
+    desc: 'Custom-molded to sit partially within the ear canal. Smaller and less noticeable than ITE models.',
+    bestFor: 'Mild to moderately severe hearing loss',
+    sizeLabel: 'Small',
+    sizeVal: 3,
+    color: 'from-green-50 to-slate-50',
+    textColor: 'text-green-500',
+    image: itcAid,
+  },
+  {
+    abbr: 'CIC',
+    name: 'Completely-In-Canal',
+    shortName: 'Completely-In-Canal',
+    desc: 'A tiny shell that fits entirely inside the ear canal, hidden from most viewing angles. Minimal wind noise due to its recessed position.',
+    bestFor: 'Mild to moderate severe hearing loss',
+    sizeLabel: 'Very Small',
+    sizeVal: 2,
+    color: 'from-purple-50 to-slate-50',
+    textColor: 'text-purple-500',
+    image: cicAid,
+  },
+  {
+    abbr: 'IIC',
+    name: 'Invisible-In-Canal',
+    shortName: 'Invisible-In-Canal',
+    desc: 'The smallest custom-made shell, fitting deep in the bony canal — virtually invisible to others and exceptionally discreet.',
+    bestFor: 'Mild to moderate hearing loss',
+    sizeLabel: 'Invisible',
+    sizeVal: 1,
+    color: 'from-primary/5 to-slate-50',
+    textColor: 'text-primary',
+    image: iicAid,
+  },
+  {
+    abbr: 'EARBUD',
+    name: 'Earbud Hearing Aid',
+    shortName: 'Modern Earbud',
+    desc: 'Stylish earbud-style hearing aids with clear sound and smart connectivity. Rechargeable, comfortable, and designed for modern lifestyles.',
+    bestFor: 'Mild to severe hearing loss',
+    sizeLabel: 'Bluetooth Style',
+    sizeVal: 4,
+    color: 'from-slate-100 to-white',
+    textColor: 'text-slate-600',
+    image: earbudAid,
+  },
+];
+
+const technologyTypes = [
+  {
+    tier: '01',
+    name: 'Analog',
+    badge: 'Entry Level',
+    badgeColor: 'bg-slate-100 text-slate-500',
+    desc: 'Converts sound waves into amplified electrical signals. Simple, robust, and affordable — a practical choice for straightforward amplification needs.',
+    features: ['Basic amplification', 'No digital processing', 'Low power consumption'],
+    dark: false,
+  },
+  {
+    tier: '02',
+    name: 'Digital',
+    badge: 'Advanced',
+    badgeColor: 'bg-blue-50 text-blue-600',
+    desc: 'Converts sound into digital code for sophisticated processing — superior clarity, programmable channels, directional microphones, and background noise reduction.',
+    features: ['Programmable channels', 'Noise reduction', 'Bluetooth connectivity'],
+    dark: false,
+  },
+  {
+    tier: '03',
+    name: 'AI-Powered',
+    badge: 'Premium',
+    badgeColor: 'bg-primary text-white',
+    desc: 'The pinnacle of hearing technology. Machine learning continuously analyzes your environment — automatically dampening noise, focusing on speech, and learning your preferences.',
+    features: ['Environment learning', 'Auto-adaptive focus', 'Real-time scene detection'],
+    dark: true,
+  },
+];
+
+const powerTypes = [
+  {
+    icon: '⚡',
+    name: 'Rechargeable',
+    tag: 'Most Popular',
+    desc: 'Built-in advanced Li-ion batteries deliver all-day power from a single overnight charge. Simply place in the charging case at bedtime — no tiny batteries to fumble with.',
+    pros: ['All-day power (up to 24h)', 'No battery replacements', 'Eco-friendly & cost-effective', 'Quick 3-hour full charge'],
+  },
+  {
+    icon: '🔋',
+    name: 'Disposable Battery',
+    tag: 'Flexible',
+    desc: 'Uses standard replaceable zinc-air batteries. Ideal for those who prefer the freedom to swap batteries anywhere — no charging infrastructure needed.',
+    pros: ['Available globally', 'Swap instantly anywhere', 'No charge-time dependency', 'Familiar & simple'],
+  },
+];
+
+const specialTypes = [
+  {
+    abbr: 'CROS',
+    name: 'CROS Hearing Aids',
+    fullName: 'Contralateral Routing of Signal',
+    desc: 'For single-sided deafness — picks up sound from the non-hearing side and routes it wirelessly to the better ear, giving 360° sound awareness.',
+    accent: 'bg-blue-50 border-blue-100 text-blue-700',
+  },
+  {
+    abbr: 'BiCROS',
+    name: 'BiCROS Hearing Aids',
+    fullName: 'Bilateral CROS',
+    desc: 'Like CROS, but amplifies sound in the better ear too — for bilateral asymmetrical hearing loss where both ears have some degree of loss.',
+    accent: 'bg-indigo-50 border-indigo-100 text-indigo-700',
+  },
+  {
+    abbr: 'BC',
+    name: 'Bone Conduction Device',
+    fullName: 'Bone Conduction Hearing',
+    desc: 'Bypasses the outer and middle ear entirely, transmitting sound vibrations through the skull directly to the cochlea. Ideal for conductive hearing loss or atresia.',
+    accent: 'bg-amber-50 border-amber-100 text-amber-700',
+  },
+  {
+    abbr: 'TMD',
+    name: 'Tinnitus Device',
+    fullName: 'Tinnitus Management Device',
+    desc: 'Hearing aids with built-in masking technology that generates configurable soothing sounds to relieve the perception of ringing, buzzing, or hissing in the ears.',
+    accent: 'bg-green-50 border-green-100 text-green-700',
+  },
+];
+
+const advancements = [
+  {
+    icon: 'cpu',
+    title: 'Artificial Intelligence',
+    desc: 'Continuously learns your listening environments and automatically dampens background noise while prioritizing speech — no manual adjustments required.',
+  },
+  {
+    icon: 'wifi',
+    title: 'Wireless Connectivity',
+    desc: 'Bluetooth 5 LE streams music, TV audio, and phone calls directly from your devices to your hearing aids with virtually zero latency.',
+  },
+  {
+    icon: 'battery',
+    title: 'All-Day Rechargeability',
+    desc: 'Advanced lithium-ion cells deliver a full day of power from a single overnight charge, eliminating the need for tiny battery swaps.',
+  },
+  {
+    icon: 'volume-x',
+    title: 'Aggressive Noise Reduction',
+    desc: 'Features like Speech Enhancer and StereoZoom actively suppress noise from the sides and back — hearing clearly in a busy restaurant becomes effortless.',
+  },
+];
+---
+
+<BaseLayout
+  title="Premium Hearing Aids & Fitting Services | Joy of Hearing"
+  description="Discover premium hearing aids, expert fitting, trials, & maintenance at Joy of Hearing. We offer top brands, styles, and technology for your hearing loss."
+>
+  <!-- Service Schema Markup -->
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Hearing Aids & Fitting Services",
+    "serviceType": "Hearing Aid Fitting & Consultation",
+    "description": "Discover premium hearing aids, expert fitting, trials, and maintenance at Joy of Hearing. We offer top brands including Phonak, Signia, Resound, Widex, and Starkey.",
+    "provider": {
+      "@type": "MedicalClinic",
+      "name": "Joy of Hearing",
+      "telephone": "+919548148852"
+    },
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "Punjab, India"
+    }
+  })} />
+  <!-- Hero Section -->
+  <section class="pt-48 pb-40 bg-secondary text-white relative overflow-hidden flex flex-col justify-center">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/20 blur-[150px] rounded-full pointer-events-none mix-blend-screen"></div>
+    <div class="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-primary/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA0MCAwIEwgMCAwIDAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-60"></div>
+
+    <div class="max-w-6xl mx-auto px-4 relative z-10 w-full flex flex-col items-center text-center mt-4">
+      <a href={`${import.meta.env.BASE_URL}services`} class="group inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/80 hover:text-white hover:bg-white/10 hover:border-white/20 font-medium mb-8 transition-all backdrop-blur-md text-xs tracking-[0.2em] uppercase shadow-xl">
+        <Icon name="arrow-left" size={14} class="group-hover:-translate-x-1 transition-transform" />
+        All Services
+      </a>
+
+      <h1 class="reveal opacity-0 translate-y-10 transition-all duration-1000 delay-100 ease-out text-5xl md:text-[5rem] lg:text-[5.5rem] font-semibold tracking-tighter text-white leading-[1.05] mb-6 text-center">
+        Hearing <span class="text-primary">Aids</span>
+      </h1>
+      <p class="reveal opacity-0 translate-y-10 transition-all duration-1000 delay-200 ease-out text-lg md:text-2xl text-white/70 max-w-2xl font-medium leading-relaxed">
+        Personalized fitting, real-world trials, and lifetime support — across every style, technology, and budget.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="pb-32 bg-white relative">
+    <div class="max-w-6xl mx-auto px-4">
+
+      <!-- Hero Image -->
+      <div class="relative -mt-32 mb-20 z-20 rounded-[40px] overflow-hidden shadow-2xl shadow-black/10 border-[6px] border-white bg-bg-soft w-full aspect-[16/9] lg:aspect-[21/9]">
+        <Image src={heroImage} alt="Hearing Aids" class="w-full h-full object-cover object-center" />
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 items-start mt-8">
+
+        <!-- Main Content -->
+        <div class="lg:col-span-8 space-y-24">
+
+          <!-- Intro -->
+          <div>
+            <p class="text-2xl text-fg font-medium leading-relaxed mb-6">
+              Find a solution that <span class="text-primary font-semibold">perfectly fits your lifestyle</span>. We offer a curated range of premium brands, allowing you to choose the absolute best for you. Try it instantly, step outside, and experience the difference—with <span class="font-semibold text-fg">no strings attached.</span>
+            </p>
+          </div>
+
+          <!-- ──────────────────────────────── -->
+          <!-- SECTION 1: Style & Design        -->
+          <!-- ──────────────────────────────── -->
+          <div id="style-design" class="scroll-mt-24">
+            <div class="mb-2">
+              <span class="text-xs font-bold text-primary uppercase tracking-[0.2em]">Based on Style & Design</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tighter text-fg mb-3">Find Your <span class="text-primary">Perfect Fit</span></h2>
+            <p class="text-fg-muted font-medium leading-relaxed mb-12">From virtually invisible to behind-the-ear — each style is crafted for a different lifestyle. Choose the one that fits yours.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {styleTypes.map((type) => (
+                <div id={type.abbr.toLowerCase()} class="group relative bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)] rounded-3xl hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:scale-[1.01] transition-all duration-500 ease-out overflow-hidden cursor-default scroll-mt-32">
+
+                  <!-- Product image — full width, centered, large -->
+                  <div class="flex items-center justify-center h-56 pt-10 px-12 pb-4 overflow-hidden">
+                    {type.image && (
+                      <Image
+                        src={type.image}
+                        alt={type.name}
+                        class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                        width={200}
+                        height={200}
+                      />
+                    )}
+                  </div>
+
+                  <!-- Text — clean and minimal -->
+                  <div class="px-8 pt-5 pb-8">
+                    <p class="text-xs font-bold text-primary uppercase tracking-[0.18em] mb-1">{type.abbr}</p>
+                    <h3 class="text-2xl font-semibold text-fg tracking-tight mb-2">{type.name}</h3>
+                    <p class="text-base text-fg-muted font-medium leading-relaxed mb-4">{type.desc}</p>
+                    <span class="inline-flex items-center gap-1.5 text-xs font-bold text-fg/50 uppercase tracking-widest">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><polyline points="20 6 9 17 4 12"/></svg>
+                      Best for: {type.bestFor}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- SECTION 2: Technology Levels -->
+          <div id="technology" class="scroll-mt-24">
+            <div class="mb-2">
+              <span class="text-xs font-bold text-primary uppercase tracking-[0.2em]">Based on Technology</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tighter text-fg mb-3">Hearing Aid <span class="text-primary">Technology Levels</span></h2>
+            <p class="text-fg-muted font-medium leading-relaxed mb-12">From robust basic amplification to state-of-the-art AI-driven environment learning — choose the tier that matches your listening needs.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {technologyTypes.map((tech) => (
+                <div class={`group relative rounded-3xl p-8 flex flex-col justify-between transition-all duration-500 ease-out hover:scale-[1.01] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] ${tech.dark ? 'bg-secondary text-white' : 'bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)]'}`}>
+                  {tech.dark && (
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none rounded-3xl"></div>
+                  )}
+                  <div class="relative z-10">
+                    <div class="flex justify-between items-center mb-6">
+                      <span class={`text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full ${tech.dark ? 'bg-primary text-white' : tech.badgeColor}`}>
+                        {tech.badge}
+                      </span>
+                      <span class={`text-4xl font-black ${tech.dark ? 'text-white/10' : 'text-fg/5'}`}>{tech.tier}</span>
+                    </div>
+
+                    <h3 class={`text-2xl font-bold tracking-tight mb-3 ${tech.dark ? 'text-white' : 'text-fg'}`}>{tech.name}</h3>
+                    <p class={`text-base font-medium leading-relaxed mb-6 ${tech.dark ? 'text-white/80' : 'text-fg-muted'}`}>{tech.desc}</p>
+                  </div>
+
+                  <div class="relative z-10 border-t pt-6 mt-6 border-current/10">
+                    <p class={`text-xs font-bold uppercase tracking-wider mb-3 ${tech.dark ? 'text-primary' : 'text-primary'}`}>Key Features</p>
+                    <ul class="space-y-2.5">
+                      {tech.features.map((feature) => (
+                        <li class="flex items-center gap-2 text-sm font-medium">
+                          <Icon name="check" class="text-primary shrink-0" size={14} />
+                          <span class={tech.dark ? 'text-white/90' : 'text-fg'}>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- SECTION 3: Power Source -->
+          <div id="power-source" class="scroll-mt-24">
+            <div class="mb-2">
+              <span class="text-xs font-bold text-primary uppercase tracking-[0.2em]">Based on Power Source</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tighter text-fg mb-3">Rechargeable vs. <span class="text-primary">Disposable</span></h2>
+            <p class="text-fg-muted font-medium leading-relaxed mb-12">Select the convenience of overnight charging or the flexibility of replacing batteries on the fly.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {powerTypes.map((power) => (
+                <div class="group bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)] rounded-3xl hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:scale-[1.01] p-8 transition-all duration-500 ease-out">
+                  <div class="flex justify-between items-start mb-6">
+                    <div class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-500">
+                      {power.icon}
+                    </div>
+                    <span class="text-[10px] font-semibold uppercase tracking-wider bg-primary/10 text-primary rounded-full px-3 py-1">
+                      {power.tag}
+                    </span>
+                  </div>
+
+                  <h3 class="text-2xl font-bold tracking-tight text-fg mb-3">{power.name}</h3>
+                  <p class="text-base text-fg-muted font-medium leading-relaxed mb-8">{power.desc}</p>
+
+                  <div class="border-t border-slate-100 pt-6">
+                    <p class="text-xs font-bold uppercase tracking-wider text-primary mb-4">Advantages</p>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {power.pros.map((pro) => (
+                        <li class="flex items-start gap-2.5 text-sm font-medium text-fg-muted">
+                          <Icon name="check" class="text-primary shrink-0 mt-0.5" size={14} />
+                          <span class="leading-tight">{pro}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- SECTION 4: Specialized Solutions -->
+          <div id="special-types" class="scroll-mt-24">
+            <div class="mb-2">
+              <span class="text-xs font-bold text-primary uppercase tracking-[0.2em]">Specialized Solutions</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tighter text-fg mb-3">Special <span class="text-primary">Hearing Systems</span></h2>
+            <p class="text-fg-muted font-medium leading-relaxed mb-12">Clinically-engineered systems designed to solve specific challenges like single-sided deafness or tinnitus.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {specialTypes.map((special) => (
+                <div class="group bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)] rounded-3xl hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:scale-[1.01] transition-all duration-500 ease-out p-8 flex flex-col justify-between relative overflow-hidden">
+                  <div>
+                    <div class="flex justify-between items-center mb-6">
+                      <span class={`text-xs font-semibold tracking-widest px-3 py-1 rounded-lg ${special.accent}`}>
+                        {special.abbr}
+                      </span>
+                    </div>
+
+                    <h3 class="text-xl font-bold tracking-tight text-fg mb-1">{special.name}</h3>
+                    <p class="text-xs font-bold text-primary uppercase tracking-wide mb-4">{special.fullName}</p>
+                    <p class="text-base text-fg-muted font-medium leading-relaxed">{special.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- ──────────────────────────────── -->
+          <!-- SECTION 5: Modern Advancements   -->
+          <!-- ──────────────────────────────── -->
+          <div id="advancements" class="scroll-mt-24">
+            <div class="mb-10">
+              <span class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-2 block">What's New</span>
+              <h2 class="text-3xl md:text-4xl font-semibold tracking-tighter text-fg mb-3">Modern <span class="text-primary">Advancements</span></h2>
+              <p class="text-fg-muted font-medium leading-relaxed max-w-lg">Today's hearing aids are miniaturized computers — learning, adapting, and connecting to your world in real time.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+              <!-- AI -->
+              <div class="group bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)] rounded-3xl hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:scale-[1.01] transition-all duration-500 ease-out p-8 relative overflow-hidden">
+                <div class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center mb-5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                </div>
+                <h3 class="text-xl font-semibold text-fg tracking-tight mb-2">Artificial Intelligence</h3>
+                <p class="text-base text-fg-muted font-medium leading-relaxed">Continuously learns your listening environments and auto-dampens noise — no manual adjustments needed.</p>
+              </div>
+
+              <!-- Wireless -->
+              <div class="group bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)] rounded-3xl hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:scale-[1.01] transition-all duration-500 ease-out p-8 relative overflow-hidden">
+                <div class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center mb-5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+                </div>
+                <h3 class="text-xl font-semibold text-fg tracking-tight mb-2">Wireless Connectivity</h3>
+                <p class="text-base text-fg-muted font-medium leading-relaxed">Bluetooth 5 LE streams music, TV audio, and calls directly to your hearing aids with virtually zero latency.</p>
+              </div>
+
+              <!-- Battery -->
+              <div class="group bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)] rounded-3xl hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:scale-[1.01] transition-all duration-500 ease-out p-8 relative overflow-hidden">
+                <div class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center mb-5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"/><line x1="23" y1="13" x2="23" y2="11"/><line x1="7" y1="12" x2="13" y2="12"/><line x1="10" y1="9" x2="10" y2="15"/></svg>
+                </div>
+                <h3 class="text-xl font-semibold text-fg tracking-tight mb-2">All-Day Rechargeability</h3>
+                <p class="text-base text-fg-muted font-medium leading-relaxed">Lithium-ion cells deliver a full day of power from a single overnight charge. No tiny battery swaps.</p>
+              </div>
+
+              <!-- Noise Reduction -->
+              <div class="group bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)] rounded-3xl hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:scale-[1.01] transition-all duration-500 ease-out p-8 relative overflow-hidden">
+                <div class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center mb-5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                </div>
+                <h3 class="text-xl font-semibold text-fg tracking-tight mb-2">Aggressive Noise Reduction</h3>
+                <p class="text-base text-fg-muted font-medium leading-relaxed">Speech Enhancer and StereoZoom suppress background noise — hearing clearly in a restaurant becomes effortless.</p>
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+
+        <!-- ──────────────────────────────── -->
+        <!-- Sticky Sidebar                   -->
+        <!-- ──────────────────────────────── -->
+        <div class="lg:col-span-4 space-y-6 sticky top-32">
+
+          <!-- Quick Navigation -->
+          <div class="bg-[#F9FAFB] rounded-3xl p-7 border border-border/40 shadow-sm">
+            <h3 class="text-base font-semibold text-fg tracking-tight mb-4">Quick Navigation</h3>
+            <ul class="space-y-1">
+              {[
+                { href: '#style-design', label: 'Style & Design', num: '01' },
+                { href: '#technology', label: 'Technology', num: '02' },
+                { href: '#power-source', label: 'Power Source', num: '03' },
+                { href: '#special-types', label: 'Special Types', num: '04' },
+                { href: '#advancements', label: 'Modern Advancements', num: '✦' },
+              ].map(link => (
+                <li>
+                  <a href={link.href} class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-fg-muted hover:text-primary hover:bg-primary/5 transition-colors group">
+                    <span class="text-[10px] font-black text-primary/50 group-hover:text-primary w-5 shrink-0">{link.num}</span>
+                    {link.label}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ml-auto text-primary/30 group-hover:text-primary transition-colors"><polyline points="9 18 15 12 9 6"/></svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Who this is for -->
+          <div class="bg-[#F9FAFB] rounded-3xl p-7 border border-border/40 shadow-sm">
+            <h3 class="text-base font-semibold text-fg tracking-tight mb-4 flex items-center gap-2">
+              <Icon name="users" size={18} class="text-primary" /> Who this is <span class="text-primary">for</span>
+            </h3>
+            <ul class="space-y-3">
+              {['Individuals diagnosed with any degree of hearing loss.', 'Current users looking to upgrade to newer technology.', 'Those seeking invisible or rechargeable solutions.'].map(item => (
+                <li class="flex items-start gap-3 text-sm font-medium text-fg-muted">
+                  <Icon name="check" size={16} class="text-primary shrink-0 mt-0.5" />
+                  <span class="leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- What to expect -->
+          <div class="bg-[#F9FAFB] rounded-3xl p-7 border border-border/40 shadow-sm">
+            <h3 class="text-base font-semibold text-fg tracking-tight mb-4 flex items-center gap-2">
+              <Icon name="info" size={18} class="text-primary" /> What to <span class="text-primary">expect</span>
+            </h3>
+            <ul class="space-y-3">
+              {['Discussion of your lifestyle and hearing needs.', 'Selection of the most appropriate hearing device.', 'Instant trial and precise fitting in the clinic.', 'Follow-up fine-tuning and ongoing maintenance.'].map((item, idx) => (
+                <li class="flex items-start gap-3 text-sm font-medium text-fg-muted">
+                  <span class="flex items-center justify-center w-5 h-5 rounded-full bg-primary/10 text-primary text-[10px] font-bold shrink-0 mt-0.5">
+                    {idx + 1}
+                  </span>
+                  <span class="leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Booking CTA -->
+          <div class="bg-primary rounded-3xl p-7 text-white shadow-lg shadow-primary/20">
+            <h3 class="text-xl font-semibold tracking-tighter mb-2">Ready to begin?</h3>
+            <p class="text-white/80 text-sm font-medium mb-6 leading-relaxed">
+              Our clinical specialists are ready to help you find the perfect hearing solution.
+            </p>
+            <a
+              href={`${import.meta.env.BASE_URL}contact`}
+              class="flex items-center justify-center gap-2 w-full py-4 px-6 bg-white text-primary rounded-xl font-semibold tracking-wide hover:bg-white/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 text-sm"
+            >
+              Book Consultation <Icon name="arrow-right" size={15} />
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
+  </script>
+</BaseLayout>

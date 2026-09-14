@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Privacy Policy | Joy of Hearing" description="Learn about how Joy of Hearing protects and manages your data.">
+  <section class="py-20 md:py-32 bg-secondary text-white overflow-hidden relative">
+    <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+      <span class="text-primary font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-4 block">Legal</span>
+      <h1 class="text-4xl md:text-6xl font-semibold mb-6 tracking-tight">Privacy Policy</h1>
+      <p class="text-lg text-white/70">Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-bg">
+    <div class="max-w-4xl mx-auto px-4 prose prose-lg prose-headings:text-fg prose-p:text-fg-muted prose-a:text-primary">
+      <h2>Introduction</h2>
+      <p>At Joy of Hearing, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.</p>
+
+      <h2>Information We Collect</h2>
+      <p>We may collect personal information that you voluntarily provide to us when you express an interest in obtaining information about us or our products and Services, when you participate in activities on the Website, or otherwise when you contact us. This includes:</p>
+      <ul>
+        <li>Name and Contact Data (such as email address and phone number)</li>
+        <li>Health-related information provided during assessments</li>
+        <li>Resume and employment history (when applying for careers)</li>
+      </ul>
+
+      <h2>How We Use Your Information</h2>
+      <p>We use personal information collected via our Website for a variety of business purposes, including:</p>
+      <ul>
+        <li>To facilitate account creation and logon process.</li>
+        <li>To send administrative information to you.</li>
+        <li>To fulfill and manage your requests for services.</li>
+        <li>To respond to user inquiries and offer support to users.</li>
+      </ul>
+
+      <h2>Data Security</h2>
+      <p>We implement a variety of security measures to maintain the safety of your personal information. However, please also remember that we cannot guarantee that the internet itself is 100% secure.</p>
+
+      <h2>Contact Us</h2>
+      <p>If you have questions or comments about this policy, you may email us at Customercare@joyofhearing.net.</p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,175 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { waHref } from '../../config/contact';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map(service => ({
+    params: { slug: service.data.slug },
+    props: { service },
+  }));
+}
+
+type Props = { service: CollectionEntry<'services'> };
+const { service } = Astro.props;
+const { Content } = await render(service);
+const waLink = waHref(`Hello, I would like to inquire about your ${service.data.title} services.`);
+
+// Dynamically split the title to highlight the last word in red
+const titleWords = service.data.title.split(' ');
+const lastWord = titleWords.pop();
+const restOfTitle = titleWords.join(' ');
+---
+
+<BaseLayout
+  title={service.data.seoTitle || `${service.data.title} | Joy of Hearing`}
+  description={service.data.seoDescription || service.data.summary}
+>
+  <!-- Service Schema Markup -->
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": service.data.title,
+    "serviceType": service.data.title,
+    "description": service.data.seoDescription || service.data.summary,
+    "provider": {
+      "@type": "MedicalClinic",
+      "name": "Joy of Hearing",
+      "telephone": "+919548148852"
+    },
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "Punjab, India"
+    }
+  })} />
+  <!-- Hero Section -->
+  <section class="pt-48 pb-40 bg-secondary text-white relative overflow-hidden flex flex-col justify-center">
+    
+    <!-- Ambient glowing orbs for extreme depth -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/20 blur-[150px] rounded-full pointer-events-none mix-blend-screen"></div>
+    <div class="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-primary/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
+    
+    <!-- Subtle architectural grid texture -->
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA0MCAwIEwgMCAwIDAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-60"></div>
+
+    <div class="max-w-6xl mx-auto px-4 relative z-10 w-full flex flex-col items-center text-center mt-4">
+      
+      <!-- Breadcrumb Navigation -->
+      <nav aria-label="Breadcrumb" class="mb-8 reveal opacity-0 translate-y-6 transition-all duration-1000 ease-out">
+        <ol class="flex items-center justify-center space-x-2 text-sm font-medium text-white/60 overflow-hidden whitespace-nowrap">
+          <li>
+            <a href={`${import.meta.env.BASE_URL}`} class="hover:text-white transition-colors">Home</a>
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/30"><path d="m9 18 6-6-6-6"/></svg>
+          </li>
+          <li>
+            <a href={`${import.meta.env.BASE_URL}services`} class="hover:text-white transition-colors">Services</a>
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/30"><path d="m9 18 6-6-6-6"/></svg>
+          </li>
+          <li class="text-white truncate max-w-[150px] sm:max-w-[300px] md:max-w-[400px]" aria-current="page">
+            {service.data.title}
+          </li>
+        </ol>
+      </nav>
+
+      <!-- Monumental Typography -->
+      <h1 class="reveal opacity-0 translate-y-10 transition-all duration-1000 delay-100 ease-out text-5xl md:text-[5rem] lg:text-[5.5rem] font-semibold tracking-tighter text-white leading-[1.05] mb-6 drop-shadow-2xl text-center">
+        {restOfTitle} <span class="text-primary drop-shadow-[0_0_15px_rgba(238,49,55,0.3)]">{lastWord}</span>
+      </h1>
+      
+      <!-- Elegant Subtitle -->
+      <p class="reveal opacity-0 translate-y-10 transition-all duration-1000 delay-200 ease-out text-lg md:text-2xl text-white/70 max-w-2xl font-medium leading-relaxed">
+        {service.data.summary}
+      </p>
+      
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="pb-32 bg-white relative">
+    <div class="max-w-6xl mx-auto px-4">
+      
+      <!-- Massive overlapping hero image -->
+      {service.data.heroImage && (
+        <div class="relative -mt-32 mb-20 z-20 rounded-[40px] overflow-hidden shadow-2xl shadow-black/10 border-[6px] border-white bg-bg-soft w-full aspect-[16/9] lg:aspect-[21/9]">
+          <Image src={service.data.heroImage} alt={service.data.title} class={`w-full h-full object-cover ${service.data.heroImagePosition ?? 'object-center'}`} />
+        </div>
+      )}
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 items-start mt-8">
+        
+        <!-- Main Content (Markdown) -->
+        <div class="lg:col-span-8 prose prose-lg md:prose-xl max-w-none 
+                    prose-headings:font-semibold prose-headings:tracking-tighter prose-headings:text-fg 
+                    prose-h2:text-4xl prose-h2:mt-16 prose-h2:mb-8
+                    prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-6
+                    prose-p:text-fg-muted prose-p:font-medium prose-p:leading-relaxed prose-p:mb-8
+                    prose-li:text-fg-muted prose-li:font-medium prose-li:mb-2
+                    prose-ul:mt-6 prose-ul:mb-10
+                    prose-strong:text-fg prose-strong:font-semibold
+                    prose-a:text-primary hover:prose-a:text-primary-hover transition-colors
+                    marker:text-primary/40">
+          <Content />
+        </div>
+
+      <!-- Sticky Sidebar -->
+      <div class="lg:col-span-4 space-y-8 sticky top-32">
+        
+        {service.data.whoFor && service.data.whoFor.length > 0 && (
+          <div class="bg-[#F9FAFB] rounded-3xl p-8 border border-border/40 shadow-sm">
+            <h2 class="text-xl font-semibold text-fg tracking-tight mb-5 flex items-center gap-2">
+              <Icon name="users" size={20} class="text-primary" /> Who this is <span class="text-primary">for</span>
+            </h2>
+            <ul class="space-y-4">
+              {service.data.whoFor.map((item: string) => (
+                <li class="flex items-start gap-3 text-sm font-medium text-fg-muted">
+                  <Icon name="check" size={18} class="text-primary shrink-0 mt-0.5" />
+                  <span class="leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {service.data.whatToExpect && service.data.whatToExpect.length > 0 && (
+          <div class="bg-[#F9FAFB] rounded-3xl p-8 border border-border/40 shadow-sm">
+            <h2 class="text-xl font-semibold text-fg tracking-tight mb-5 flex items-center gap-2">
+              <Icon name="info" size={20} class="text-primary" /> What to <span class="text-primary">expect</span>
+            </h2>
+            <ul class="space-y-4">
+              {service.data.whatToExpect.map((item: string, idx: number) => (
+                <li class="flex items-start gap-3 text-sm font-medium text-fg-muted">
+                  <span class="flex items-center justify-center w-5 h-5 rounded-full bg-primary/10 text-primary text-[10px] font-bold shrink-0 mt-0.5">
+                    {idx + 1}
+                  </span>
+                  <span class="leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <!-- Booking CTA -->
+        <div class="bg-primary rounded-3xl p-8 text-white shadow-lg shadow-primary/20">
+          <h2 class="text-2xl font-semibold tracking-tighter mb-3">Ready to begin?</h2>
+          <p class="text-white/80 text-sm font-medium mb-8 leading-relaxed">
+            Our clinical specialists are ready to provide world-class audiology care.
+          </p>
+          <a 
+            href={`${import.meta.env.BASE_URL}contact`} 
+            class="flex items-center justify-center gap-2 w-full py-4 px-6 bg-white text-primary rounded-xl font-semibold tracking-wide hover:bg-white/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+          >
+            Book Consultation <Icon name="arrow-right" size={16} />
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>

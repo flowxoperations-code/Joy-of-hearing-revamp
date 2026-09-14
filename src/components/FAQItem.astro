@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  question: string;
+  answer: string;
+}
+
+const { question, answer } = Astro.props;
+---
+<details class="group border-b border-border py-4 marker:content-['']">
+  <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-lg text-fg hover:text-primary transition-colors">
+    <span>{question}</span>
+    <span class="transition-transform duration-200 group-open:rotate-180 text-primary ml-4 flex-shrink-0">
+      <Icon name="chevron-down" size={20} />
+    </span>
+  </summary>
+  <p class="text-base text-fg-muted mt-3 leading-relaxed">
+    {answer}
+  </p>
+</details>
+
+<style>
+  /* Hide default summary marker in Safari */
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

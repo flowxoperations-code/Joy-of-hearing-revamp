@@ -1,0 +1,45 @@
+---
+import { telHref, waHref } from '../config/contact';
+import Icon from './Icon.astro';
+---
+<div id="sticky-contact-bar" class="fixed bottom-0 left-0 right-0 z-50 bg-bg border-t border-border pb-[env(safe-area-inset-bottom)] md:hidden shadow-[0_-4px_12px_rgba(0,0,0,0.05)] transition-transform duration-300 translate-y-0">
+  <div class="flex h-16 divide-x divide-border">
+    <a href={telHref} class="flex-1 flex flex-col items-center justify-center text-primary hover:bg-primary-soft transition-colors" aria-label="Call us">
+      <Icon name="phone" size={20} class="mb-1" />
+      <span class="text-[11px] font-medium leading-none">Call</span>
+    </a>
+    <a href={waHref()} class="flex-1 flex flex-col items-center justify-center text-[#25D366] hover:bg-green-50 transition-colors" aria-label="WhatsApp">
+      <Icon name="message-circle" size={20} class="mb-1" />
+      <span class="text-[11px] font-medium leading-none text-fg">WhatsApp</span>
+    </a>
+    <a href={`${import.meta.env.BASE_URL}contact`} class="flex-1 flex flex-col items-center justify-center bg-primary text-white hover:bg-primary-hover transition-colors" aria-label="Book appointment">
+      <Icon name="calendar" size={20} class="mb-1" />
+      <span class="text-[11px] font-medium leading-none">Book</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  // Hide sticky bar when a primary CTA is in viewport
+  document.addEventListener('DOMContentLoaded', () => {
+    const stickyBar = document.getElementById('sticky-contact-bar');
+    const primaryCtas = document.querySelectorAll('.primary-cta-in-view');
+    
+    if (!stickyBar || primaryCtas.length === 0) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+      let anyVisible = false;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) anyVisible = true;
+      });
+      
+      if (anyVisible) {
+        stickyBar.classList.add('translate-y-full');
+      } else {
+        stickyBar.classList.remove('translate-y-full');
+      }
+    }, { threshold: 0.1 });
+    
+    primaryCtas.forEach(cta => observer.observe(cta));
+  });
+</script>

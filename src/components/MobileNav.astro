@@ -1,0 +1,128 @@
+---
+import Icon from './Icon.astro';
+import Button from './Button.astro';
+import { telHref, waHref } from '../config/contact';
+import { getCollection } from 'astro:content';
+
+const services = await getCollection('services');
+const sortedServices = services.sort((a, b) => a.data.order - b.data.order).filter(s => s.data.slug !== 'hearing-aids');
+---
+
+<div class="md:hidden">
+  <button id="mobile-menu-toggle" class="p-2 -mr-2 text-fg hover:text-primary transition-colors" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle menu">
+    <Icon name="menu" size={24} />
+  </button>
+
+  <dialog id="mobile-menu" class="w-full h-full max-w-full max-h-full m-0 bg-white backdrop:bg-black/50 p-0 open:flex flex-col">
+    <div class="flex items-center justify-between p-4 border-b border-border h-16">
+      <span class="font-bold text-xl text-fg">Joy of Hearing</span>
+      <button id="mobile-menu-close" class="p-2 -mr-2 text-fg hover:text-primary transition-colors" aria-label="Close menu">
+        <Icon name="x" size={24} />
+      </button>
+    </div>
+
+    <nav class="flex flex-col px-6 py-8 gap-5 overflow-y-auto">
+      <a href={import.meta.env.BASE_URL} class="text-2xl font-semibold text-fg hover:text-primary">Home</a>
+      <a href={`${import.meta.env.BASE_URL}about`} class="text-2xl font-semibold text-fg hover:text-primary">About Us</a>
+
+      <!-- Services accordion -->
+      <details class="group/svc">
+        <summary class="flex items-center justify-between text-2xl font-semibold text-fg hover:text-primary cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+          Services
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-50 group-open/svc:rotate-180 transition-transform duration-300"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="mt-3 ml-4 flex flex-col gap-1 border-l-2 border-border pl-4">
+          <a href={`${import.meta.env.BASE_URL}services`} class="text-base font-semibold text-primary py-1">All Services →</a>
+          {sortedServices.map(service => (
+            <a href={`${import.meta.env.BASE_URL}services/${service.data.slug}`} class="text-base font-medium text-fg-muted hover:text-primary py-1.5">
+              {service.data.title}
+            </a>
+          ))}
+        </div>
+      </details>
+
+      <!-- Hearing Aids accordion -->
+      <details class="group/ha">
+        <summary class="flex items-center justify-between text-2xl font-semibold text-fg hover:text-primary cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+          Hearing Aids
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-50 group-open/ha:rotate-180 transition-transform duration-300"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="mt-3 ml-4 flex flex-col gap-1 border-l-2 border-border pl-4">
+          <a href={`${import.meta.env.BASE_URL}services/hearing-aids`} class="text-base font-semibold text-primary py-1">All Hearing Aids →</a>
+          <a href={`${import.meta.env.BASE_URL}services/hearing-aids#style-design`} class="text-base font-medium text-fg-muted hover:text-primary py-1.5">Style &amp; Design</a>
+          <a href={`${import.meta.env.BASE_URL}services/hearing-aids#technology`} class="text-base font-medium text-fg-muted hover:text-primary py-1.5">Technology</a>
+          <a href={`${import.meta.env.BASE_URL}services/hearing-aids#power-source`} class="text-base font-medium text-fg-muted hover:text-primary py-1.5">Power Source</a>
+          <a href={`${import.meta.env.BASE_URL}services/hearing-aids#special-types`} class="text-base font-medium text-fg-muted hover:text-primary py-1.5">Special Types</a>
+          <a href={`${import.meta.env.BASE_URL}services/hearing-aids#advancements`} class="text-base font-medium text-fg-muted hover:text-primary py-1.5">Modern Advancements</a>
+        </div>
+      </details>
+
+      <!-- Screening accordion -->
+      <details class="group/scr">
+        <summary class="flex items-center justify-between text-2xl font-semibold text-fg hover:text-primary cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+          Screening
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-50 group-open/scr:rotate-180 transition-transform duration-300"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="mt-3 ml-4 flex flex-col gap-1 border-l-2 border-border pl-4">
+          <a href={`${import.meta.env.BASE_URL}assessment`} class="text-base font-medium text-fg-muted hover:text-primary py-1.5">
+            🎧 Hearing Screening
+          </a>
+          <a href={`${import.meta.env.BASE_URL}assessment`} class="text-base font-medium text-fg-muted hover:text-primary py-1.5">
+            💬 Speech &amp; Language Screening
+          </a>
+        </div>
+      </details>
+
+      <a href={`${import.meta.env.BASE_URL}branches`} class="text-2xl font-semibold text-fg hover:text-primary">Branches</a>
+      <a href={`${import.meta.env.BASE_URL}careers`} class="text-2xl font-semibold text-fg hover:text-primary">Careers</a>
+      <a href={`${import.meta.env.BASE_URL}blog`} class="text-2xl font-semibold text-fg hover:text-primary">Blog</a>
+      <a href={`${import.meta.env.BASE_URL}contact`} class="text-2xl font-semibold text-fg hover:text-primary">Contact</a>
+
+      <div class="mt-8 pt-8 border-t border-border flex flex-col gap-4">
+        <Button href={`${import.meta.env.BASE_URL}contact`} class="w-full" size="lg">Book Appointment</Button>
+        <Button href={telHref} variant="secondary" class="w-full" size="lg">Call Us</Button>
+        <Button href={waHref()} variant="ghost" class="w-full" size="lg">WhatsApp Us</Button>
+      </div>
+    </nav>
+  </dialog>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const closeBtn = document.getElementById('mobile-menu-close');
+    const dialog = document.getElementById('mobile-menu') as HTMLDialogElement;
+
+    if (!toggle || !dialog || !closeBtn) return;
+
+    toggle.addEventListener('click', () => {
+      dialog.showModal();
+      document.body.style.overflow = 'hidden';
+      toggle.setAttribute('aria-expanded', 'true');
+    });
+
+    const closeModal = () => {
+      dialog.close();
+      document.body.style.overflow = '';
+      toggle.setAttribute('aria-expanded', 'false');
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) closeModal();
+    });
+
+    // Close on navigation (links only, not summary elements)
+    const links = dialog.querySelectorAll('a');
+    links.forEach(link => {
+      link.addEventListener('click', closeModal);
+    });
+  });
+</script>
+
+<style>
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+</style>

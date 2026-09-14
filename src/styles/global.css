@@ -1,0 +1,34 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-bg: #FFFFFF;
+  --color-bg-soft: #F5F5F7; /* Premium tech light gray */
+  --color-bg-surface: #FFFFFF;
+  
+  --color-fg: #1D1D1F; /* Deep premium text */
+  --color-fg-muted: #86868B; /* Elegant secondary text */
+  
+  /* Joy of Hearing Red */
+  --color-primary: #ee3137;
+  --color-primary-hover: #bb0006;
+  --color-primary-soft: #fde8e9;
+  
+  /* Joy of Hearing Navy */
+  --color-secondary: #4E567A;
+  --color-secondary-soft: #484a6d;
+  
+  --color-border: #D2D2D7;
+
+  /* Classic SF Pro / Apple-style system font stack with Inter as primary */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+@layer base {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+  }
+}

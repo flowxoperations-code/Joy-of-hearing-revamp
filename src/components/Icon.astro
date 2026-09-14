@@ -1,0 +1,29 @@
+---
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+interface Props {
+  name: string;
+  class?: string;
+  size?: number | string;
+}
+
+const { name, class: className = '', size = 24 } = Astro.props;
+
+let svgContent = '';
+try {
+  const iconPath = resolve(process.cwd(), 'node_modules/lucide-static/icons', `${name}.svg`);
+  let rawSvg = readFileSync(iconPath, 'utf8');
+  // Simple regex to inject classes and remove original width/height if needed
+  rawSvg = rawSvg.replace(/width="24"/, `width="${size}"`);
+  rawSvg = rawSvg.replace(/height="24"/, `height="${size}"`);
+  rawSvg = rawSvg.replace(/class="[^"]+"/, `class="lucide lucide-${name} ${className}"`);
+  if (!rawSvg.includes('class=')) {
+    rawSvg = rawSvg.replace('<svg ', `<svg class="lucide lucide-${name} ${className}" `);
+  }
+  svgContent = rawSvg;
+} catch (e) {
+  console.error(`Icon ${name} not found`);
+}
+---
+<Fragment set:html={svgContent} />

@@ -1,0 +1,385 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { Image } from 'astro:assets';
+
+// Import images for optimization
+import clinicHeroImage from '../assets/images/indian_clinic_hero_1778224461642.webp';
+import consultationImage from '../assets/images/indian_audiologist_consultation_1778224444440.webp';
+import hearingAidMacroImage from '../assets/images/indian_hearing_aid_macro_1778224495407.webp';
+import pediatricAudiologyImage from '../assets/images/indian_pediatric_audiology_1778224477472.webp';
+---
+
+<BaseLayout title="About Us | Joy of Hearing" description="Learn about Joy of Hearing clinic, our mission, state-of-the-art European technology, and expert team of audiologists and speech therapists across India.">
+  <!-- Hero Section -->
+  <section class="pt-32 pb-16 max-w-6xl mx-auto px-4 text-center">
+    <h1 class="reveal opacity-0 translate-y-6 transition-all duration-1000 ease-out text-4xl md:text-5xl lg:text-[80px] font-semibold tracking-tighter text-fg mb-4 leading-none">
+      Transforming<br/>hearing <span class="text-primary drop-shadow-[0_0_15px_rgba(238,49,55,0.2)]">healthcare.</span>
+    </h1>
+    <p class="reveal opacity-0 translate-y-6 transition-all duration-1000 delay-200 ease-out text-xl md:text-2xl text-fg-muted max-w-3xl mx-auto font-medium leading-tight mb-12">
+      Run wholly by expert professionals, we bring international-quality diagnostics and rehabilitation to India at an <span class="text-primary font-semibold">affordable cost.</span>
+    </p>
+    
+    <div class="aspect-[21/9] rounded-[40px] overflow-hidden reveal opacity-0 translate-y-10 transition-all duration-1000 delay-300 ease-out shadow-2xl relative">
+      <div class="absolute inset-0 parallax w-full h-[130%] -top-[15%]" data-speed="0.2">
+          <Image src={clinicHeroImage} alt="Joy of Hearing Clinic" class="w-full h-full object-cover opacity-90" width={1920} height={820} loading="eager" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="py-16 md:py-24 bg-bg-soft relative z-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+        <div class="reveal opacity-0 translate-y-6 transition-all duration-1000 ease-out">
+          <div class="mb-8">
+            <span class="text-xs font-bold text-primary uppercase tracking-[0.2em]">Mission</span>
+          </div>
+          <h2 class="text-5xl font-semibold tracking-tighter text-fg mb-6">Our <span class="text-primary">Mission</span></h2>
+          <p class="text-2xl text-fg-muted font-medium leading-relaxed">
+            To transform the way hearing healthcare is perceived and experienced in India, changing the lives of millions through the dedication and superior care of our people.
+          </p>
+        </div>
+        
+        <div class="reveal opacity-0 translate-y-10 transition-all duration-1000 delay-200 ease-out">
+          <div class="mb-8">
+            <span class="text-xs font-bold text-primary uppercase tracking-[0.2em]">Vision</span>
+          </div>
+          <h2 class="text-5xl font-semibold tracking-tighter text-fg mb-6">Our <span class="text-primary">Vision</span></h2>
+          <p class="text-2xl text-fg-muted font-medium leading-relaxed">
+            Currently, optimum hearing solutions are only available to 4% of the population. We are working to reach out and provide accessible, international-quality solutions to the remaining 96% across India.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Approach (Alternating Z-Pattern) -->
+  <section class="py-16 md:py-24 bg-white relative z-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-20 reveal opacity-0 translate-y-6 transition-all duration-1000 ease-out">
+        <h2 class="text-4xl md:text-6xl font-semibold tracking-tighter text-fg mb-4">The Joy of Hearing <span class="text-primary">Difference</span></h2>
+        <p class="text-xl text-fg-muted font-medium max-w-2xl mx-auto">Why thousands of patients trust us with their auditory health.</p>
+      </div>
+
+      <div class="space-y-24">
+        <!-- Feature 1 -->
+        <div class="flex flex-col lg:flex-row gap-6 md:gap-12 lg:gap-8 md:gap-16 items-center">
+          <div class="w-full lg:w-1/2 reveal opacity-0 translate-y-6 transition-all duration-1000 ease-out">
+            <div class="aspect-square rounded-[40px] overflow-hidden bg-bg-soft relative shadow-xl">
+               <Image src={consultationImage} alt="Expert Consultation" class="w-full h-full object-cover" width={600} height={600} />
+            </div>
+          </div>
+          <div class="w-full lg:w-1/2 reveal opacity-0 translate-y-10 transition-all duration-1000 delay-200 ease-out">
+            <h3 class="text-4xl md:text-5xl font-semibold tracking-tighter text-fg mb-6">Global Technology. <span class="text-primary">Local Care.</span></h3>
+            <p class="text-xl text-fg-muted font-medium leading-relaxed mb-8">
+              Our state-of-the-art diagnostic centers are equipped entirely with advanced instruments imported from Germany, Denmark, and the USA. We provide a battery of precise tests to understand the exact nuances of your hearing profile.
+            </p>
+            <ul class="space-y-4">
+              <li class="flex items-center text-lg font-medium text-fg"><Icon name="check" class="text-primary mr-3 shrink-0" size={24} /> Exact 20-minute clinical assessments</li>
+              <li class="flex items-center text-lg font-medium text-fg"><Icon name="check" class="text-primary mr-3 shrink-0" size={24} /> Newborn hearing screening & pediatric care</li>
+              <li class="flex items-center text-lg font-medium text-fg"><Icon name="check" class="text-primary mr-3 shrink-0" size={24} /> Industrial audiometry & speech therapy</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="flex flex-col lg:flex-row-reverse gap-8 lg:gap-24 items-center">
+          <div class="w-full lg:w-1/2 reveal opacity-0 translate-y-10 transition-all duration-1000 ease-out">
+            <div class="aspect-square rounded-[40px] overflow-hidden bg-bg-soft relative shadow-xl">
+               <Image src={hearingAidMacroImage} alt="Hearing Aids" class="w-full h-full object-cover" width={600} height={600} />
+            </div>
+          </div>
+          <div class="w-full lg:w-1/2 reveal opacity-0 translate-y-10 transition-all duration-1000 delay-200 ease-out">
+            <h3 class="text-4xl md:text-5xl font-semibold tracking-tighter text-fg mb-6">Real-World Trials. <span class="text-primary">No Strings Attached.</span></h3>
+            <p class="text-xl text-fg-muted font-medium leading-relaxed mb-8">
+              We don't just fit you in a lab and send you home. You can try our modern, wirelessly connected hearing devices instantly. Take them outside, walk around, and experience the difference in a real-world environment before making any decisions.
+            </p>
+            <a href={`${import.meta.env.BASE_URL}contact`} class="inline-flex items-center text-xl font-semibold text-primary hover:text-primary-hover transition-colors group">
+              Book a free sound experience <Icon name="arrow-right" class="ml-2 transform group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clinical Expertise & Care Standards Section -->
+  <section id="expertise" class="py-16 md:py-24 bg-bg-soft relative z-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-20 reveal opacity-0 translate-y-6 transition-all duration-1000 ease-out">
+        <h2 class="text-4xl md:text-6xl font-semibold tracking-tighter text-fg mb-4">Clinical <span class="text-primary">Expertise & Care Standards</span></h2>
+        <p class="text-xl text-fg-muted font-medium max-w-2xl mx-auto">Providing a unified, professional approach to hearing healthcare across all our branches.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12">
+        <!-- Pillar 1: Qualified Audiologists -->
+        <div class="reveal opacity-0 translate-y-10 transition-all duration-1000 ease-out group">
+          <div class="aspect-[4/5] rounded-[40px] overflow-hidden bg-white mb-8 shadow-xl border border-border/50 relative">
+             <Image src={consultationImage} alt="Expert Clinical Team" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-110 group-hover:scale-100" width={500} height={625} />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          </div>
+          <h3 class="text-2xl font-bold text-fg mb-2">Qualified Audiologists</h3>
+          <p class="text-primary font-semibold uppercase tracking-widest text-xs mb-4">Overall Team Expertise</p>
+          <p class="text-fg-muted font-medium leading-relaxed">
+            Every Joy of Hearing clinic is run by qualified hearing and speech care professionals dedicated to delivering the highest standards of clinical excellence. We operate as a cohesive national network to provide expert diagnostics and personalized rehabilitation.
+          </p>
+        </div>
+
+        <!-- Pillar 2: Standardized Patient Care -->
+        <div class="reveal opacity-0 translate-y-10 transition-all duration-1000 delay-200 ease-out group">
+          <div class="aspect-[4/5] rounded-[40px] overflow-hidden bg-white mb-8 shadow-xl border border-border/50 relative">
+             <Image src={pediatricAudiologyImage} alt="Standardized Patient Care" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-110 group-hover:scale-100" width={500} height={625} />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          </div>
+          <h3 class="text-2xl font-bold text-fg mb-2">Gold-Standard Protocols</h3>
+          <p class="text-primary font-semibold uppercase tracking-widest text-xs mb-4">Standardized Patient Care</p>
+          <p class="text-fg-muted font-medium leading-relaxed">
+            We maintain strict, standardized clinical protocols across all 11 branches. From precise 20-minute assessments to evidence-based real-world hearing aid trials, you receive consistent, professional, and patient-centric care anywhere.
+          </p>
+        </div>
+
+        <!-- Pillar 3: Advanced Diagnostics & Tech -->
+        <div class="reveal opacity-0 translate-y-10 transition-all duration-1000 delay-400 ease-out group">
+          <div class="aspect-[4/5] rounded-[40px] overflow-hidden bg-white mb-8 shadow-xl border border-border/50 relative">
+             <Image src={clinicHeroImage} alt="Advanced Diagnostics and Technology" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-110 group-hover:scale-100" width={500} height={625} />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          </div>
+          <h3 class="text-2xl font-bold text-fg mb-2">Imported Diagnostic Suite</h3>
+          <p class="text-primary font-semibold uppercase tracking-widest text-xs mb-4">Advanced Infrastructure</p>
+          <p class="text-fg-muted font-medium leading-relaxed">
+            Equipped with state-of-the-art diagnostic suites imported from Germany, Denmark, and the USA, we provide a full battery of advanced services, including newborn screening, pediatric audiology, and tinnitus management.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values Section -->
+  <section class="py-16 md:py-28 bg-white relative z-20 border-t border-border/50 overflow-hidden">
+    <!-- Background accent -->
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16 reveal opacity-0 translate-y-6 transition-all duration-1000 ease-out">
+        <div>
+          <span class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-4 block">What We Stand For</span>
+          <h2 class="text-4xl md:text-6xl font-semibold tracking-tighter text-fg leading-none">Our Core <span class="text-primary">Values</span></h2>
+        </div>
+        <p class="text-lg text-fg-muted font-medium max-w-sm leading-relaxed lg:text-right">The principles that guide every clinical decision and patient interaction at Joy of Hearing.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Value 1 -->
+        <div class="group relative bg-bg-soft rounded-3xl p-8 border border-border/40 hover:border-primary/20 hover:shadow-lg transition-all duration-300 reveal opacity-0 translate-y-6 transition-all duration-1000 ease-out overflow-hidden">
+          <div class="absolute top-6 right-8 text-[80px] font-bold text-fg/[0.04] leading-none select-none">01</div>
+          <div class="relative z-10">
+            <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/15 transition-colors">
+              <Icon name="heart" class="text-primary" size={24} />
+            </div>
+            <h3 class="text-2xl font-semibold tracking-tight text-fg mb-3">Empathy First</h3>
+            <div class="w-8 h-0.5 bg-primary/40 mb-4 group-hover:w-16 transition-all duration-300"></div>
+            <p class="text-fg-muted leading-relaxed font-medium">We understand that hearing loss affects the whole family. We listen — truly listen — with compassion and design solutions that fit seamlessly into your life, not the other way around.</p>
+          </div>
+        </div>
+
+        <!-- Value 2 -->
+        <div class="group relative bg-secondary rounded-3xl p-8 border border-secondary hover:shadow-xl transition-all duration-300 reveal opacity-0 translate-y-6 transition-all duration-1000 delay-100 ease-out overflow-hidden">
+          <div class="absolute top-6 right-8 text-[80px] font-bold text-white/[0.04] leading-none select-none">02</div>
+          <div class="relative z-10">
+            <div class="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center mb-6">
+              <Icon name="award" class="text-primary" size={24} />
+            </div>
+            <h3 class="text-2xl font-semibold tracking-tight text-white mb-3">Clinical Excellence</h3>
+            <div class="w-8 h-0.5 bg-primary/60 mb-4 group-hover:w-16 transition-all duration-300"></div>
+            <p class="text-white/70 leading-relaxed font-medium">Driven by evidence-based practice, our fully-qualified audiologists continually update their skills and protocols to offer world-class diagnostics and rehabilitation that rival any international standard.</p>
+          </div>
+        </div>
+
+        <!-- Value 3 -->
+        <div class="group relative bg-secondary rounded-3xl p-8 border border-secondary hover:shadow-xl transition-all duration-300 reveal opacity-0 translate-y-6 transition-all duration-1000 delay-200 ease-out overflow-hidden">
+          <div class="absolute top-6 right-8 text-[80px] font-bold text-white/[0.04] leading-none select-none">03</div>
+          <div class="relative z-10">
+            <div class="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center mb-6">
+              <Icon name="shield" class="text-primary" size={24} />
+            </div>
+            <h3 class="text-2xl font-semibold tracking-tight text-white mb-3">Uncompromising Integrity</h3>
+            <div class="w-8 h-0.5 bg-primary/60 mb-4 group-hover:w-16 transition-all duration-300"></div>
+            <p class="text-white/70 leading-relaxed font-medium">We recommend what you truly need — nothing more, nothing less. Our transparent, no-pressure approach ensures you only invest in technology that meaningfully improves your quality of life.</p>
+          </div>
+        </div>
+
+        <!-- Value 4 -->
+        <div class="group relative bg-bg-soft rounded-3xl p-8 border border-border/40 hover:border-primary/20 hover:shadow-lg transition-all duration-300 reveal opacity-0 translate-y-6 transition-all duration-1000 delay-300 ease-out overflow-hidden">
+          <div class="absolute top-6 right-8 text-[80px] font-bold text-fg/[0.04] leading-none select-none">04</div>
+          <div class="relative z-10">
+            <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/15 transition-colors">
+              <Icon name="users" class="text-primary" size={24} />
+            </div>
+            <h3 class="text-2xl font-semibold tracking-tight text-fg mb-3">Lifelong Partnership</h3>
+            <div class="w-8 h-0.5 bg-primary/40 mb-4 group-hover:w-16 transition-all duration-300"></div>
+            <p class="text-fg-muted leading-relaxed font-medium">Hearing healthcare is a lifelong journey. We stand alongside you with comprehensive aftercare, fine-tuning adjustments, and continuous support — long after your first fitting.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQs Section -->
+  <section class="py-16 md:py-28 bg-bg-soft relative z-20 border-t border-border/50">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+
+        <!-- Sticky heading column -->
+        <div class="lg:col-span-4 lg:sticky lg:top-32 reveal opacity-0 translate-y-6 transition-all duration-1000 ease-out">
+          <span class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-4 block">Have Questions?</span>
+          <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-fg mb-6 leading-none">Frequently <br/>Asked <span class="text-primary">Questions</span></h2>
+          <p class="text-lg text-fg-muted font-medium leading-relaxed mb-8">Can't find what you're looking for? We're always happy to help.</p>
+          <a href={`${import.meta.env.BASE_URL}contact`} class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white text-sm font-semibold hover:bg-primary-hover transition-colors shadow-lg shadow-primary/20">
+            Contact Us <Icon name="arrow-right" size={14} />
+          </a>
+        </div>
+
+        <!-- FAQ accordion -->
+        <div class="lg:col-span-8 space-y-3 reveal opacity-0 translate-y-6 transition-all duration-1000 delay-200 ease-out">
+          <details class="bg-white rounded-2xl border border-border/50 cursor-pointer group overflow-hidden">
+            <summary class="flex justify-between items-center gap-4 p-6 text-lg font-semibold text-fg list-none outline-none hover:text-primary transition-colors [&::-webkit-details-marker]:hidden">
+              What makes Joy of Hearing different from other clinics?
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center group-open:bg-primary transition-colors">
+                <Icon name="chevron-down" class="text-primary group-open:text-white transition-all group-open:rotate-180" size={16} />
+              </span>
+            </summary>
+            <div class="px-6 pb-6">
+              <p class="text-fg-muted leading-relaxed font-medium">We are run wholly by expert clinical professionals — not a retail outlet. Every recommendation is grounded in precise audiological assessment, evidence-based practice, and transparent pricing. We bring internationally-calibrated diagnostics and rehabilitation to India at an accessible cost, without compromise on quality.</p>
+            </div>
+          </details>
+
+          <details class="bg-white rounded-2xl border border-border/50 cursor-pointer group overflow-hidden">
+            <summary class="flex justify-between items-center gap-4 p-6 text-lg font-semibold text-fg list-none outline-none hover:text-primary transition-colors [&::-webkit-details-marker]:hidden">
+              How long does a hearing assessment take?
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center group-open:bg-primary transition-colors">
+                <Icon name="chevron-down" class="text-primary group-open:text-white transition-all group-open:rotate-180" size={16} />
+              </span>
+            </summary>
+            <div class="px-6 pb-6">
+              <p class="text-fg-muted leading-relaxed font-medium">A comprehensive clinical hearing assessment takes approximately 20–30 minutes. It includes a physical examination of the ear canal (otoscopy), pure-tone audiometry across all frequencies, speech discrimination testing, and middle-ear function tests (tympanometry) — providing a complete picture of your hearing health.</p>
+            </div>
+          </details>
+
+          <details class="bg-white rounded-2xl border border-border/50 cursor-pointer group overflow-hidden">
+            <summary class="flex justify-between items-center gap-4 p-6 text-lg font-semibold text-fg list-none outline-none hover:text-primary transition-colors [&::-webkit-details-marker]:hidden">
+              Do you offer trials for hearing aids?
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center group-open:bg-primary transition-colors">
+                <Icon name="chevron-down" class="text-primary group-open:text-white transition-all group-open:rotate-180" size={16} />
+              </span>
+            </summary>
+            <div class="px-6 pb-6">
+              <p class="text-fg-muted leading-relaxed font-medium">Absolutely. We offer real-world, no-obligation trials. You can try modern hearing devices instantly in the clinic, then step outside and experience the difference in everyday environments before making any commitment. We believe you should be confident in your choice before you invest.</p>
+            </div>
+          </details>
+
+          <details class="bg-white rounded-2xl border border-border/50 cursor-pointer group overflow-hidden">
+            <summary class="flex justify-between items-center gap-4 p-6 text-lg font-semibold text-fg list-none outline-none hover:text-primary transition-colors [&::-webkit-details-marker]:hidden">
+              At what age should children get their hearing tested?
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center group-open:bg-primary transition-colors">
+                <Icon name="chevron-down" class="text-primary group-open:text-white transition-all group-open:rotate-180" size={16} />
+              </span>
+            </summary>
+            <div class="px-6 pb-6">
+              <p class="text-fg-muted leading-relaxed font-medium">Newborn hearing screening should ideally be done within the first month of life. For children, hearing should be routinely assessed at key developmental milestones — especially if there are concerns about speech delays, inattention in class, or a family history of hearing loss. Early identification is critical for language and learning development.</p>
+            </div>
+          </details>
+
+          <details class="bg-white rounded-2xl border border-border/50 cursor-pointer group overflow-hidden">
+            <summary class="flex justify-between items-center gap-4 p-6 text-lg font-semibold text-fg list-none outline-none hover:text-primary transition-colors [&::-webkit-details-marker]:hidden">
+              What is the difference between a screening and a full assessment?
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center group-open:bg-primary transition-colors">
+                <Icon name="chevron-down" class="text-primary group-open:text-white transition-all group-open:rotate-180" size={16} />
+              </span>
+            </summary>
+            <div class="px-6 pb-6">
+              <p class="text-fg-muted leading-relaxed font-medium">A hearing screening is a quick pass/fail test — it tells you whether further testing is needed, but does not diagnose the type or degree of hearing loss. A full clinical assessment (audiogram) provides a detailed map of your hearing across all frequencies and gives your audiologist the information needed to recommend the right treatment or technology.</p>
+            </div>
+          </details>
+
+          <details class="bg-white rounded-2xl border border-border/50 cursor-pointer group overflow-hidden">
+            <summary class="flex justify-between items-center gap-4 p-6 text-lg font-semibold text-fg list-none outline-none hover:text-primary transition-colors [&::-webkit-details-marker]:hidden">
+              How long does it take to adjust to wearing hearing aids?
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center group-open:bg-primary transition-colors">
+                <Icon name="chevron-down" class="text-primary group-open:text-white transition-all group-open:rotate-180" size={16} />
+              </span>
+            </summary>
+            <div class="px-6 pb-6">
+              <p class="text-fg-muted leading-relaxed font-medium">For most people, the brain needs 4 to 6 weeks to adapt to the new range of sounds introduced by hearing aids. We guide you through a structured acclimatisation plan — starting in quieter settings and progressively moving to more challenging environments. Follow-up appointments ensure your settings are fine-tuned as you adapt.</p>
+            </div>
+          </details>
+
+          <details class="bg-white rounded-2xl border border-border/50 cursor-pointer group overflow-hidden">
+            <summary class="flex justify-between items-center gap-4 p-6 text-lg font-semibold text-fg list-none outline-none hover:text-primary transition-colors [&::-webkit-details-marker]:hidden">
+              How often should adults get their hearing tested?
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center group-open:bg-primary transition-colors">
+                <Icon name="chevron-down" class="text-primary group-open:text-white transition-all group-open:rotate-180" size={16} />
+              </span>
+            </summary>
+            <div class="px-6 pb-6">
+              <p class="text-fg-muted leading-relaxed font-medium">Adults should have their hearing checked at least once every 1–2 years after the age of 50, even if they do not notice any hearing difficulties. Annual hearing evaluations are recommended for individuals exposed to loud noise, experiencing tinnitus (ringing in the ears), or noticing changes in their hearing. Regular hearing assessments help detect problems early, allowing timely intervention and better long-term hearing health.</p>
+            </div>
+          </details>
+
+          <details class="bg-white rounded-2xl border border-border/50 cursor-pointer group overflow-hidden">
+            <summary class="flex justify-between items-center gap-4 p-6 text-lg font-semibold text-fg list-none outline-none hover:text-primary transition-colors [&::-webkit-details-marker]:hidden">
+              Do you have multiple clinic locations across India?
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center group-open:bg-primary transition-colors">
+                <Icon name="chevron-down" class="text-primary group-open:text-white transition-all group-open:rotate-180" size={16} />
+              </span>
+            </summary>
+            <div class="px-6 pb-6">
+              <p class="text-fg-muted leading-relaxed font-medium">Yes. Joy of Hearing operates across multiple cities in India, with each clinic staffed by qualified hearing and speech care professionals and equipped with advanced imported diagnostic instruments. Visit our <a href={`${import.meta.env.BASE_URL}branches`} class="text-primary font-semibold hover:underline">Branches</a> page to find the centre nearest to you.</p>
+            </div>
+          </details>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 md:py-24 bg-secondary text-white text-center px-4 reveal opacity-0 translate-y-6 transition-all duration-1000 ease-out">
+    <h2 class="text-4xl md:text-6xl font-semibold tracking-tighter mb-6">Ready to hear the world again?</h2>
+    <p class="text-xl text-white/70 font-medium max-w-xl mx-auto mb-10">Join the thousands of patients who have transformed their lives with our expert clinical team.</p>
+    <a href={`${import.meta.env.BASE_URL}contact`} class="inline-block bg-white text-secondary px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-transform shadow-xl">
+      Schedule an Assessment
+    </a>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            const scrolled = window.scrollY;
+            document.querySelectorAll('.parallax').forEach(el => {
+              const speed = el.getAttribute('data-speed') || 0.5;
+              const yPos = -(scrolled * parseFloat(speed));
+              (el as HTMLElement).style.transform = `translate3d(0, ${yPos}px, 0)`;
+            });
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    });
+  </script>
+</BaseLayout>
