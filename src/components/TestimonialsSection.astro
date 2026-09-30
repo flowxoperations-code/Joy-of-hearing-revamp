@@ -85,18 +85,37 @@ const all = await getCollection('testimonials');
     const totalWidth = track.scrollWidth / 2;
     let pos = 0;
     let paused = false;
+    let isIntersecting = false;
+    let animId: number | null = null;
 
     track.addEventListener('mouseenter', () => paused = true);
     track.addEventListener('mouseleave', () => paused = false);
 
-    function animate() {
-      if (!paused) {
+    function loop() {
+      if (!paused && isIntersecting) {
         pos += 0.5;
         if (pos >= totalWidth) pos = 0;
         track.style.transform = `translateX(-${pos}px)`;
       }
-      requestAnimationFrame(animate);
+      if (isIntersecting) {
+        animId = requestAnimationFrame(loop);
+      }
     }
-    animate();
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isIntersecting = entry.isIntersecting;
+        if (isIntersecting) {
+          if (!animId) loop();
+        } else {
+          if (animId) {
+            cancelAnimationFrame(animId);
+            animId = null;
+          }
+        }
+      });
+    }, { rootMargin: '100px' });
+
+    obs.observe(track);
   }
 </script>

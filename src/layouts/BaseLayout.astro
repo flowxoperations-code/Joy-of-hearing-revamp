@@ -10,12 +10,14 @@ interface Props {
   title?: string;
   description?: string;
   keywords?: string;
+  preloadImage?: string;
 }
 
 const { 
   title = "Joy of Hearing | Complete Hearing & Speech Solution", 
   description = "Joy of Hearing Clinic provides expert audiology, speech therapy, and premium hearing aids with clinical excellence.",
-  keywords = "hearing aids, speech therapy, audiologist, hearing loss, hearing clinic, joy of hearing, hearing test, tinnitus"
+  keywords = "hearing aids, speech therapy, audiologist, hearing loss, hearing clinic, joy of hearing, hearing test, tinnitus",
+  preloadImage
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -23,14 +25,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZFFE225TB"></script>
-    <script>
+    <!-- Google tag (gtag.js) - Deferred for performance -->
+    <script type="text/javascript">
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-2ZFFE225TB');
+
+      setTimeout(function() {
+        var script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-2ZFFE225TB';
+        script.async = true;
+        document.head.appendChild(script);
+      }, 3500); // Delay loading GA by 3.5s to allow LCP/FCP to finish first
     </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -38,9 +45,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" type="image/png" sizes="96x96" href={`${import.meta.env.BASE_URL}favicon-96x96.png`} />
     <link rel="icon" type="image/x-icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
     <link rel="apple-touch-icon" sizes="180x180" href={`${import.meta.env.BASE_URL}apple-touch-icon.png`} />
+    
+    <!-- Non-render-blocking Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    </noscript>
+
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
     <meta name="generator" content={Astro.generator} />
     
     <!-- SEO Tags -->
@@ -102,27 +117,23 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <script>
       // Global scroll reveal & Parallax
       document.addEventListener('DOMContentLoaded', () => {
-        // Reveal Logic
+        // Reveal Logic (Zero forced reflow)
         const revealObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               const el = entry.target as HTMLElement;
-              const idx = parseInt(el.dataset.staggerIdx || '0');
-              el.style.transitionDelay = `${Math.min(idx * 90, 360)}ms`;
               el.classList.remove('opacity-0', 'translate-y-6', 'translate-y-10', 'translate-y-12');
               revealObserver.unobserve(el);
             }
           });
-        }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+        }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
         
         document.querySelectorAll('.reveal').forEach((el) => {
-          const siblings = Array.from(el.parentElement?.children || []).filter(c => c.classList.contains('reveal'));
-          (el as HTMLElement).dataset.staggerIdx = String(siblings.indexOf(el));
           revealObserver.observe(el);
         });
 
         // Parallax Logic
-        const parallaxElements = document.querySelectorAll('.parallax');
+        const parallaxElements = Array.from(document.querySelectorAll('.parallax'));
         if (parallaxElements.length > 0) {
           const parallaxObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -141,10 +152,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             if (!ticking) {
               window.requestAnimationFrame(() => {
                 const scrolled = window.scrollY;
-                document.querySelectorAll('.parallax.is-visible').forEach(el => {
-                  const speed = parseFloat((el as HTMLElement).dataset.speed || '0.2');
-                  (el as HTMLElement).style.transform = `translate3d(0, ${-(scrolled * speed)}px, 0)`;
-                });
+                for (let i = 0; i < parallaxElements.length; i++) {
+                  const el = parallaxElements[i];
+                  if (el.classList.contains('is-visible')) {
+                    const speed = parseFloat((el as HTMLElement).dataset.speed || '0.2');
+                    (el as HTMLElement).style.transform = `translate3d(0, ${-(scrolled * speed)}px, 0)`;
+                  }
+                }
                 ticking = false;
               });
               ticking = true;
