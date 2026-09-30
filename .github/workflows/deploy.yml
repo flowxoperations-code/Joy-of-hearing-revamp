@@ -1,0 +1,45 @@
+name: deploy
+
+"on":
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          # Not repository secrets. Empty values keep the build from
+          # depending on PUBLIC_GA4_ID or PUBLIC_WEB3FORMS_KEY.
+          PUBLIC_GA4_ID: ""
+          PUBLIC_WEB3FORMS_KEY: ""
+
+      - name: Deploy to Hostinger via lftp
+        env:
+          FTP_HOST: ${{ secrets.HOSTINGER_FTP_HOST }}
+          FTP_USER: ${{ secrets.HOSTINGER_FTP_USER }}
+          FTP_PASS: ${{ secrets.HOSTINGER_FTP_PASS }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+          # cmd:fail-exit makes a failed mirror fail the job. Do not echo credentials.
+          lftp -e "set cmd:fail-exit yes; mirror -R --delete dist/ public_html/; bye" \
+            -u "$FTP_USER","$FTP_PASS" "$FTP_HOST"
