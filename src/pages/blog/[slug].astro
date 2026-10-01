@@ -101,7 +101,7 @@ const recentBlogs = allBlogs
 
     {blog.data.heroImage && (
       <div class="rounded-[32px] overflow-hidden mb-12 reveal opacity-0 translate-y-6 transition-all duration-1000 delay-200 ease-out shadow-xl">
-        <Image src={blog.data.heroImage} alt={blog.data.title} class="w-full h-auto" />
+        <Image src={blog.data.heroImage} alt={blog.data.heroAlt || blog.data.title} class="w-full h-auto" />
       </div>
     )}
 
