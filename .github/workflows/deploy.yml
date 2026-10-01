@@ -43,5 +43,5 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y lftp
           # cmd:fail-exit makes a failed mirror fail the job. Do not echo credentials.
-          lftp -e "set cmd:fail-exit yes; mirror -R --delete dist/ public_html/; bye" \
+          lftp -e "set cmd:fail-exit yes; mirror -R --delete dist/ /; bye" \
             -u "$FTP_USER","$FTP_PASS" "$FTP_HOST"
