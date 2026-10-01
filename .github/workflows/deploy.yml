@@ -34,14 +34,37 @@ jobs:
           PUBLIC_GA4_ID: ""
           PUBLIC_WEB3FORMS_KEY: ""
 
-      - name: Deploy to Hostinger via lftp
+      - name: Deploy to Hostinger via SSH
         env:
-          FTP_HOST: ${{ secrets.HOSTINGER_FTP_HOST }}
-          FTP_USER: ${{ secrets.HOSTINGER_FTP_USER }}
-          FTP_PASS: ${{ secrets.HOSTINGER_FTP_PASS }}
+          HOSTINGER_SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
         run: |
-          sudo apt-get update
-          sudo apt-get install -y lftp
-          # cmd:fail-exit makes a failed mirror fail the job. Do not echo credentials.
-          lftp -e "set cmd:fail-exit yes; mirror -R --delete dist/ /; bye" \
-            -u "$FTP_USER","$FTP_PASS" "$FTP_HOST"
+          set -euo pipefail
+          if [ -z "${HOSTINGER_SSH_KEY}" ]; then
+            echo "HOSTINGER_SSH_KEY is empty; refusing to deploy." >&2
+            exit 1
+          fi
+          if [ ! -d dist ] || [ -z "$(ls -A dist)" ]; then
+            echo "dist/ is missing or empty; refusing to upload." >&2
+            exit 1
+          fi
+          install -m 700 -d ~/.ssh
+          # Do not echo the key. A trailing newline keeps OpenSSH from rejecting it.
+          printf '%s\n' "$HOSTINGER_SSH_KEY" | tr -d '\r' > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          unset HOSTINGER_SSH_KEY
+          if ! grep -q "PRIVATE KEY" ~/.ssh/deploy_key; then
+            echo "HOSTINGER_SSH_KEY is not an OpenSSH private key." >&2
+            exit 1
+          fi
+          # Pinned ed25519 host key for 217.21.91.202:65002.
+          # SHA256:1OcXNTZiXr2ExmAsVyVsn1olKkilmPijF7pELRvWMEM
+          # StrictHostKeyChecking stays on; this is not trust-on-first-use.
+          printf '%s\n' '[217.21.91.202]:65002 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK5AsvHgeGrFgvZwdSBg+3ulOfljSLDNy+vup5bWc4zl' > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+          # dist/ contents land in the web root. A trailing slash on both
+          # sides avoids a nested public_html or dist directory.
+          # --delete-after matches the old mirror --delete, after the copy.
+          rsync -az --delete-after --timeout=120 --no-owner --no-group \
+            -e "ssh -i ${HOME}/.ssh/deploy_key -p 65002 -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=30 -o HostKeyAlgorithms=ssh-ed25519 -o StrictHostKeyChecking=yes -o UserKnownHostsFile=${HOME}/.ssh/known_hosts" \
+            dist/ \
+            "u984763065@217.21.91.202:/home/u984763065/domains/joyofhearing.net/public_html/"
