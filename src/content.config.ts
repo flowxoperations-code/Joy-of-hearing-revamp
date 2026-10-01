@@ -70,6 +70,7 @@ const blogs = defineCollection({
     author: z.string().default("Joy of Hearing Team"),
     category: z.string(),
     heroImage: image().optional(),
+    heroAlt: z.string().optional(),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
   }),
