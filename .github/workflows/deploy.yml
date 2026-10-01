@@ -18,7 +18,9 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # Astro exits unless Node is >=22.12.0 (package.json engines).
+          # 22 tracks the latest 22.x release, which satisfies that floor.
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
