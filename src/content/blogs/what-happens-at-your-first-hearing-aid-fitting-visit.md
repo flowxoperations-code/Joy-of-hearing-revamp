@@ -11,7 +11,7 @@ A hearing aid fitting is not a product demo. It is a calm visit where we match s
 
 Most people arrive after a hearing assessment. Some already wear aids that no longer feel right. Either way, the visit is paced. You stay seated. You say what sounds sharp, soft, or distant. The goal is comfort and clarity, not a hurried sale.
 
-![A sound-wave and magnifying glass beside “Your first fitting visit.”](../../assets/blogs/blog_hearing-aid-fitting_1.png)
+![A woman sits with a doctor beside “Your first fitting visit.”](../../assets/blogs/blog_hearing-aid-fitting_1.png)
 
 ## Before the aids go on
 
@@ -19,7 +19,7 @@ Bring your latest hearing report if you have one. Tell us where talk is hardest:
 
 We also check the ear canal and how the shell or soft tip sits. A poor fit can make sound whistle or feel blocked. Sorting that early saves frustration later.
 
-![Three places talk is hardest: home, a shop or market, and a wedding hall.](../../assets/blogs/blog_hearing-aid-fitting_2.png)
+![An older man and a woman at a clinic table with a blank report, beside home, a shop, and a wedding hall.](../../assets/blogs/blog_hearing-aid-fitting_2.png)
 
 ## Trying sound in the room
 
@@ -27,7 +27,7 @@ Once the aids are on, we start with soft speech, then add everyday noise. You te
 
 If something feels too sharp or too quiet, say so in the moment. Small changes in the room are easier than guessing alone at home that evening.
 
-![A speaker icon beside “Trying sound in the room.”](../../assets/blogs/blog_hearing-aid-fitting_3.png)
+![A doctor holds a hearing aid toward a woman beside “Trying sound in the room.”](../../assets/blogs/blog_hearing-aid-fitting_3.png)
 
 ## Fine-tuning takes a few visits
 
@@ -35,7 +35,7 @@ The first setting is a start, not the final answer. Real life is louder and mess
 
 If wax builds up, or if the tip no longer sits well, we sort that before we chase more programme changes. Comfort comes first.
 
-![Two sliders beside “Fine-tuning takes a few visits.”](../../assets/blogs/blog_hearing-aid-fitting_4.png)
+![Hands fit a behind-the-ear hearing aid beside “Fine-tuning takes a few visits.”](../../assets/blogs/blog_hearing-aid-fitting_4.png)
 
 ## What you practise at home
 
@@ -45,6 +45,6 @@ We show you how to put the aids on, take them off, and keep them dry and clean. 
 
 At Joy of Hearing, hearing aid fitting and follow-up fine-tuning are available across 11 branches in Punjab.
 
-![“Ready when you are.” and a button to book a hearing aid fitting.](../../assets/blogs/blog_hearing-aid-fitting_5.png)
+![A woman at reception, with “Ready when you are.” and a button to book a hearing aid fitting.](../../assets/blogs/blog_hearing-aid-fitting_5.png)
 
 Call or WhatsApp us at +91 95481 48852 or visit joyofhearing.net to book your hearing aid fitting today.
