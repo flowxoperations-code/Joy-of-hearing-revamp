@@ -217,20 +217,20 @@ export default function BlogControls({ title }: { title: string }) {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between bg-secondary/30 backdrop-blur-md border border-border/50 rounded-[24px] p-4 mb-10 gap-4">
+    <div className="flex flex-col sm:flex-row items-center justify-between bg-secondary/30 backdrop-blur-md border border-border/50 rounded-[24px] p-4 mb-10 gap-4 w-full max-w-full min-w-0">
       {/* Google Translate Element - Positioned off-screen so script can initialize it */}
       <div 
         id="google_translate_element" 
         style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', width: 0, height: 0, overflow: 'hidden' }}
       ></div>
 
-      <div className="flex items-center gap-2 w-full sm:w-auto">
+      <div className="flex items-center gap-2 w-full sm:w-auto min-w-0">
         {(['en', 'hi'] as const).map((lang) => (
           <button 
             key={lang}
             onClick={() => handleLanguageChange(lang)}
             disabled={isTranslating}
-            className={`flex-1 sm:flex-none px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${currentLang === lang ? 'bg-primary text-white shadow-lg' : 'bg-white/5 text-fg hover:bg-white/10 border border-white/5'} ${isTranslating ? 'opacity-60 cursor-wait' : ''}`}
+            className={`flex-1 sm:flex-none min-w-0 px-4 sm:px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${currentLang === lang ? 'bg-primary text-white shadow-lg' : 'bg-white/5 text-fg hover:bg-white/10 border border-white/5'} ${isTranslating ? 'opacity-60 cursor-wait' : ''}`}
           >
             {lang === 'en' ? 'English' : 'हिंदी'}
           </button>
@@ -240,10 +240,10 @@ export default function BlogControls({ title }: { title: string }) {
         )}
       </div>
 
-      <div className="flex items-center gap-2 w-full sm:w-auto">
+      <div className="flex items-center gap-2 w-full sm:w-auto min-w-0">
         <button 
           onClick={togglePlay}
-          className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${isPlaying && !isPaused ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' : 'bg-white/10 text-fg hover:bg-white/20'}`}
+          className={`flex-1 sm:flex-none min-w-0 flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${isPlaying && !isPaused ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' : 'bg-white/10 text-fg hover:bg-white/20'}`}
         >
           {isPlaying && !isPaused ? (
             <>
