@@ -1,0 +1,74 @@
+---
+/**
+ * Clinic headline figures. Shared by the homepage and About page.
+ * The visible text is the finished figure so it is correct with or without JavaScript.
+ */
+---
+<section class="bg-secondary border-b border-white/5 py-10 md:py-14 relative z-20" aria-label="Clinic figures">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="grid grid-cols-2 md:grid-cols-4 divide-white/10 divide-y-2 divide-x-0 md:divide-y-0 md:divide-x">
+      <div class="stat-item text-center px-6 py-6 md:py-0">
+        <div class="text-4xl lg:text-6xl font-semibold text-white tracking-tighter mb-1 whitespace-nowrap">
+          <span class="stat-count" data-target="20" data-suffix="+" aria-label="20+">20+</span>
+        </div>
+        <p class="text-white/40 text-[11px] font-semibold uppercase tracking-[0.2em] mt-2">Years of Care</p>
+      </div>
+      <div class="stat-item text-center px-6 py-6 md:py-0">
+        <div class="text-4xl lg:text-6xl font-semibold text-white tracking-tighter mb-1 whitespace-nowrap">
+          <span class="stat-count" data-target="2" data-suffix=" Lakh+" aria-label="2 Lakh+">2 Lakh+</span>
+        </div>
+        <p class="text-white/40 text-[11px] font-semibold uppercase tracking-[0.2em] mt-2">Patients Helped</p>
+      </div>
+      <div class="stat-item text-center px-6 py-6 md:py-0">
+        <div class="text-4xl lg:text-6xl font-semibold text-white tracking-tighter mb-1 whitespace-nowrap">
+          <span class="stat-count" data-target="11" aria-label="11">11</span>
+        </div>
+        <p class="text-white/40 text-[11px] font-semibold uppercase tracking-[0.2em] mt-2">Clinic Locations</p>
+      </div>
+      <div class="stat-item text-center px-6 py-6 md:py-0">
+        <div class="text-4xl lg:text-6xl font-semibold text-white tracking-tighter mb-1 whitespace-nowrap">
+          <span class="stat-count" data-target="80000" data-suffix="+" data-grouped="true" aria-label="80,000+">80,000+</span>
+        </div>
+        <p class="text-white/40 text-[11px] font-semibold uppercase tracking-[0.2em] mt-2">Hearing Aids Fitted</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const render = (el: HTMLElement, value: number) => {
+      const suffix = el.dataset.suffix || '';
+      const rounded = Math.round(value);
+      const digits = el.dataset.grouped === 'true'
+        ? rounded.toLocaleString('en-US')
+        : String(rounded);
+      el.textContent = digits + suffix;
+    };
+
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        const target = parseInt(el.dataset.target || '', 10);
+        statObserver.unobserve(el);
+        if (reduceMotion || !Number.isFinite(target)) return;
+
+        const duration = 1400;
+        const startTime = performance.now();
+        const update = (now: number) => {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          render(el, eased * target);
+          if (progress < 1) requestAnimationFrame(update);
+          else render(el, target);
+        };
+        requestAnimationFrame(update);
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll<HTMLElement>('.stat-count').forEach(el => statObserver.observe(el));
+  });
+</script>

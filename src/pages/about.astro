@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
+import StatsStrip from '../components/StatsStrip.astro';
 import { Image } from 'astro:assets';
 
 // Import images for optimization
@@ -27,37 +28,7 @@ import pediatricAudiologyImage from '../assets/images/indian_pediatric_audiology
     </div>
   </section>
 
-  <!-- Stats Strip -->
-  <section class="bg-secondary border-b border-white/5 py-10 md:py-14 relative z-20">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="grid grid-cols-2 md:grid-cols-4 divide-white/10 divide-y-2 divide-x-0 md:divide-y-0 md:divide-x">
-        <div class="stat-item text-center px-6 py-6 md:py-0">
-          <div class="text-5xl md:text-6xl font-semibold text-white tracking-tighter mb-1">
-            <span class="stat-count" data-target="20">0</span><span>+</span>
-          </div>
-          <p class="text-white/40 text-[11px] font-semibold uppercase tracking-[0.2em] mt-2">Years of Experience</p>
-        </div>
-        <div class="stat-item text-center px-6 py-6 md:py-0">
-          <div class="text-4xl md:text-5xl font-semibold text-white tracking-tighter mb-1 whitespace-nowrap">
-            <span class="stat-count" data-target="2" data-suffix=" lakh+">0</span>
-          </div>
-          <p class="text-white/40 text-[11px] font-semibold uppercase tracking-[0.2em] mt-2">Patients</p>
-        </div>
-        <div class="stat-item text-center px-6 py-6 md:py-0 border-r border-white/10">
-          <div class="text-5xl md:text-6xl font-semibold text-white tracking-tighter mb-1">
-            <span class="stat-count" data-target="11">0</span>
-          </div>
-          <p class="text-white/40 text-[11px] font-semibold uppercase tracking-[0.2em] mt-2">Clinic Locations</p>
-        </div>
-        <div class="stat-item text-center px-6 py-6 md:py-0">
-          <div class="text-5xl md:text-6xl font-semibold text-white tracking-tighter mb-1">
-            <span class="stat-count" data-target="80" data-suffix="k+">0</span>
-          </div>
-          <p class="text-white/40 text-[11px] font-semibold uppercase tracking-[0.2em] mt-2">Hearing Aids Fitted</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <StatsStrip />
 
   <!-- Mission & Vision -->
   <section class="py-16 md:py-24 bg-bg-soft relative z-20">
@@ -396,27 +367,6 @@ import pediatricAudiologyImage from '../assets/images/indian_pediatric_audiology
       }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-      const statObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target as HTMLElement;
-          const target = parseInt(el.dataset.target || '0');
-          const suffix = el.dataset.suffix || '';
-          const duration = 1400;
-          const startTime = performance.now();
-          const update = (now: number) => {
-            const elapsed = now - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.round(eased * target).toLocaleString() + suffix;
-            if (progress < 1) requestAnimationFrame(update);
-          };
-          requestAnimationFrame(update);
-          statObserver.unobserve(el);
-        });
-      }, { threshold: 0.5 });
-      document.querySelectorAll('.stat-count').forEach(el => statObserver.observe(el));
 
       let ticking = false;
       window.addEventListener('scroll', () => {
