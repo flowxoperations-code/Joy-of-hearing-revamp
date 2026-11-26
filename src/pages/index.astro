@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { Image, getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
+import StatsStrip from '../components/StatsStrip.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
 
 // Import images for optimization
@@ -73,7 +74,7 @@ const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
         Hear the <span class="text-primary drop-shadow-[0_0_15px_rgba(238,49,55,0.5)]">world.</span>
       </h1>
       <p class="text-xl md:text-3xl text-white/90 max-w-3xl mx-auto font-medium mb-8 tracking-tight leading-tight">
-        Clinical excellence in audiology and speech therapy, driven by over six years of <span class="text-primary font-semibold drop-shadow-md">precision</span> medical care.
+        Clinical excellence in audiology and speech therapy, driven by 20+ years of experience in <span class="text-primary font-semibold drop-shadow-md">precision</span> medical care.
       </p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
         <a href={`${import.meta.env.BASE_URL}contact`} class="px-8 py-4 md:px-10 md:py-5 bg-white text-secondary rounded-full font-bold text-lg md:text-xl hover:scale-105 transition-transform duration-500 shadow-2xl w-full sm:w-auto">
@@ -86,37 +87,7 @@ const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
     </div>
   </section>
 
-  <!-- Stats Strip -->
-  <section class="bg-secondary border-b border-white/5 py-10 md:py-14 relative z-20">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="grid grid-cols-2 md:grid-cols-4 divide-white/10 divide-y-2 divide-x-0 md:divide-y-0 md:divide-x">
-        <div class="stat-item text-center px-6 py-6 md:py-0">
-          <div class="text-5xl md:text-6xl font-semibold text-white tracking-tighter mb-1">
-            <span class="stat-count" data-target="6">0</span><span>+</span>
-          </div>
-          <p class="text-white/40 text-[11px] font-semibold uppercase tracking-[0.2em] mt-2">Years of Care</p>
-        </div>
-        <div class="stat-item text-center px-6 py-6 md:py-0">
-          <div class="text-5xl md:text-6xl font-semibold text-white tracking-tighter mb-1">
-            <span class="stat-count" data-target="1" data-suffix="Lac+">0</span>
-          </div>
-          <p class="text-white/40 text-[11px] font-semibold uppercase tracking-[0.2em] mt-2">Patients Helped</p>
-        </div>
-        <div class="stat-item text-center px-6 py-6 md:py-0 border-r border-white/10">
-          <div class="text-5xl md:text-6xl font-semibold text-white tracking-tighter mb-1">
-            <span class="stat-count" data-target="11">0</span>
-          </div>
-          <p class="text-white/40 text-[11px] font-semibold uppercase tracking-[0.2em] mt-2">Clinic Locations</p>
-        </div>
-        <div class="stat-item text-center px-6 py-6 md:py-0">
-          <div class="text-5xl md:text-6xl font-semibold text-white tracking-tighter mb-1">
-            <span class="stat-count" data-target="20" data-suffix="K+">0</span>
-          </div>
-          <p class="text-white/40 text-[11px] font-semibold uppercase tracking-[0.2em] mt-2">Hearing Aids Fitted</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <StatsStrip />
 
   <!-- Video / Value Prop Section -->
   <section class="py-16 md:py-24 bg-white relative z-20">
@@ -289,7 +260,7 @@ const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
           
           <!-- Glassmorphic floating card -->
           <div class="absolute bottom-8 left-8 right-8 bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-[32px] translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-100 shadow-xl">
-            <p class="text-white font-semibold text-xl tracking-tight mb-1">6+ Years of Trust</p>
+            <p class="text-white font-semibold text-xl tracking-tight mb-1">20+ Years of Experience</p>
             <p class="text-white/70 text-sm font-medium tracking-wide uppercase">Standardized Care Across 11 Branches</p>
           </div>
         </div>
@@ -323,34 +294,6 @@ const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
   </section>
 
   <TestimonialsSection />
-
-  <!-- Script for Animated Stat Counters -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Animated stat counters
-      const statObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target as HTMLElement;
-          const target = parseInt(el.dataset.target || '0');
-          const suffix = el.dataset.suffix || '';
-          const duration = 1400;
-          const startTime = performance.now();
-          const update = (now: number) => {
-            const elapsed = now - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.round(eased * target).toLocaleString() + suffix;
-            if (progress < 1) requestAnimationFrame(update);
-          };
-          requestAnimationFrame(update);
-          statObserver.unobserve(el);
-        });
-      }, { threshold: 0.5 });
-      document.querySelectorAll('.stat-count').forEach(el => statObserver.observe(el));
-    });
-  </script>
-
 
   <script>
     // Mobile tap-to-expand for service cards
