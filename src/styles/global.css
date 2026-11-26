@@ -32,3 +32,27 @@
     color: var(--color-fg);
   }
 }
+
+/* Blog articles: keep the reading column inside the viewport.
+   Markdown figures are 1080×1080; their intrinsic width must not widen the page. */
+@layer components {
+  .blog-article .prose :where(img) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 767px) {
+    .blog-article .prose :where(img),
+    .blog-article .blog-hero img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      margin-inline: auto;
+    }
+
+    .blog-article .prose :where(h1, h2, h3, p, li) {
+      overflow-wrap: break-word;
+    }
+  }
+}
